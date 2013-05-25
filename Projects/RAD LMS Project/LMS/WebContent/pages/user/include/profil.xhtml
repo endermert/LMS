@@ -1,0 +1,163 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+<h:form id="kayit" >
+	<script type="text/javascript">
+		function Doldur(kaynak,hedef) {
+			var field1 = document.getElementById(kaynak);
+			var field2 = document.getElementById(hedef);
+			field2.value = field1.value
+		}
+		
+		function DoldurKul() {
+			Doldur('kayit:kulC1ns1yet','kulC1ns1yet1');
+			Doldur('kayit:kulUserT','kulUserT1');
+			Doldur('kayit:kulAdminT','kulAdminT1');
+		}
+	</script>
+	<h:panelGrid id="pProfil"  style="width:100%;">
+			<p:growl id="growl" showDetail="true"  />
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+					DoldurKul();
+					$('select#kulC1ns1yet1').selectmenu({style:'dropdown'});
+					$('select#kulUserT1').selectmenu({style:'dropdown'});
+					$('select#kulAdminT1').selectmenu({style:'dropdown'});
+					
+				});
+				
+			</script>
+		
+			<p:panel header="Kullanıcı Bilgileri" style="width:100%;">
+			<h:panelGrid columns="2" rowClasses="row2,row1">
+			<h:panelGroup>
+			<h:panelGrid style="margin-left: 15px;" columns="3">
+
+				<h:outputLabel value="Ad*" for="kulAd1" />
+				<p:inputText styleClass="inputText" id="kulAd1" required="true"
+					value="#{pc_Kul_duzelt.kullan1c1lar.kulAd}" label="Ad" style="width:300px;">
+				</p:inputText>
+				<p:message for="kulAd1" display="icon" />
+
+				<h:outputLabel value="Soyad*" for="kulSoyad1"></h:outputLabel>
+				<p:inputText styleClass="inputText" id="kulSoyad1" required="true"
+					value="#{pc_Kul_duzelt.kullan1c1lar.kulSoyad}" label="Soyad" style="width:300px;">
+				</p:inputText>
+				<p:message for="kulSoyad1" display="icon" />
+
+				<h:outputLabel value="E-Posta*" for="kulEposta1" />
+				<p:inputText styleClass="inputText" id="kulEposta1" required="true"
+					value="#{pc_Kul_duzelt.kullan1c1lar.kulEposta}" label="E-Posta" style="width:300px;">
+					<f:validator validatorId="EmailValidator" />
+				</p:inputText>
+				<p:message for="kulEposta1" display="icon" />
+
+				<h:outputLabel value="Parola*" for="kulS1fre1" />
+				<p:password id="kulS1fre1" required="true" minLength="8" label="Parola" style="width:200px;"
+				weakLabel="Kolay" goodLabel="İyi" strongLabel="Güçlü" promptLabel="Parolanızı Girin.."
+				value="#{pc_Kul_duzelt.kullan1c1lar.kulS1fre}"/>
+				<p:message for="kulS1fre1" display="icon" />
+
+				<h:outputLabel value="Parola(T)*" for="kulS1fre2" />
+				<p:password id="kulS1fre2" required="true" minLength="8" label="Parola(T)" style="width:200px;"
+				weakLabel="Kolay" goodLabel="İyi" strongLabel="Güçlü" promptLabel="Parolanızı Tekrar Girin.."
+				value="#{pc_Kul_duzelt.kullan1c1lar.kulS1fre}"></p:password>
+				<p:message for="kulS1fre2" display="icon" />
+
+				<h:outputLabel value="Cinsiyet" for="kulC1ns1yet1" />
+				<p:outputPanel>
+				<select name="kulC1ns1yet1" id="kulC1ns1yet1" style="width:200px;" 
+				onchange="Doldur('kulC1ns1yet1','kayit:kulC1ns1yet');" >
+					<option>Seçiniz</option>
+					<option value="Kadın" >Kadın</option>
+					<option value="Erkek" >Erkek</option>
+				</select>
+				</p:outputPanel>
+				<p:message for="kulC1ns1yet" display="icon" />
+
+				<h:outputLabel value="Doğum Tarihi" for="kulDgmTar1" />
+				<p:inputMask id="kulDgmTar1"
+					mask="99.99.9999" value="#{pc_Kul_duzelt.kullan1c1lar.kulDgmTar}"
+					label="Doğum Tarihi" required="true">
+					<f:convertDateTime pattern="dd.MM.yyyy" />
+				</p:inputMask>
+				<p:message for="kulDgmTar1" display="icon" />
+
+				<h:outputLabel value="Telefon" for="kulTel1" />
+				<p:inputMask styleClass="inputText" id="kulTel1"
+					mask="(999) 999 99 99" value="#{pc_Kul_duzelt.kullan1c1lar.kulTel}">
+				</p:inputMask>
+				<p:message for="kulTel1" display="icon" />
+
+				
+				<h:outputLabel value="Kütüphanem Teması   " for="kulUserT1" />
+				<p:outputPanel>
+					<select name="kulUserT1" id="kulUserT1" style="width:200px;" 
+					onchange="Doldur('kulUserT1','kayit:kulUserT');" >
+						<ui:repeat value="#{pc_global_kul_tools.temalar}" var="tem">
+							<option value="#{tem.slctVl}" >#{tem.slctLbl}</option>
+						</ui:repeat>
+					</select>
+				</p:outputPanel>
+				<p:message for="kulUserT" display="icon"  />
+				
+			</h:panelGrid>
+				<p:panel visible="#{pc_sessionBean.admin}" style="border:0; background: transparent;">
+					<h:panelGrid columns="3">
+						<h:outputLabel value="Yönetim Teması  " for="kulAdminT1" />
+						<p:spacer height="1" width="23"></p:spacer>
+						<p:outputPanel >
+							<select name="kulAdminT1" id="kulAdminT1" style="width:200px;" 
+							onchange="Doldur('kulAdminT1','kayit:kulAdminT');" >
+								<ui:repeat value="#{pc_global_kul_tools.temalar}" var="tem">
+									<option value="#{tem.slctVl}" >#{tem.slctLbl}</option>
+								</ui:repeat>
+							</select>
+						</p:outputPanel>		
+					</h:panelGrid>
+				</p:panel>
+				</h:panelGroup>
+				<h:panelGroup>
+				<p:panel style="width:150px; height:160px;" >
+					<div align="center">
+					<p:graphicImage width="100" height="150" value="../../resources/images/uploads/#{pc_Kul_duzelt.kullan1c1lar.kulResm1}"/>
+					</div>
+				</p:panel>
+				<h:form id="upform"  prependId="false"  enctype="multipart/form-data">
+                    <p:growl id="messages" showDetail="true"/>
+                    <p:fileUpload fileUploadListener="#{pc_Kul_duzelt.handleFileUpload}"
+                                  mode="advanced" label="Resim Seç"
+                                  update="messages"
+                                  sizeLimit="1000000"
+                                  allowTypes="png,gif,jpg" />
+                </h:form>
+				</h:panelGroup>
+			<h:panelGroup>
+				<p:commandButton value="Güncelle" update="pProfil" oncomplete="loadTheme();"
+				action="#{pc_Kul_duzelt.updateKullan1c1larAction}" image="ui-icon ui-icon-disk"/>
+				<p:messages id="kullan1c1lar2messages"/>
+			</h:panelGroup>
+			</h:panelGrid>
+			</p:panel>
+			
+		
+		
+	</h:panelGrid>
+		<p:remoteCommand name="loadTheme" action="UserProfile">
+			<f:setPropertyActionListener target="#{pc_sessionBean.kullan1c1lar}" 
+			value="#{pc_Kul_duzelt.kullan1c1lar}"></f:setPropertyActionListener>
+		</p:remoteCommand>
+		<h:inputHidden id="kulC1ns1yet" required="true" value="#{pc_Kul_duzelt.kullan1c1lar.kulC1ns1yet}"/>
+		<h:inputHidden id="kulUserT" value="#{pc_Kul_duzelt.kullan1c1lar.kulUserTema}"/>
+		<h:inputHidden id="kulAdminT" value="#{pc_Kul_duzelt.kullan1c1lar.kulAdm1nTema}"/>
+</h:form>
+</ui:composition>

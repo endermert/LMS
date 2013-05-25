@@ -1,0 +1,204 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+<h:form id="Arama">
+
+			<script type="text/javascript">
+				function Doldur2(kaynak,hedef) {
+   					var field1 = document.getElementById(hedef);
+					field1.value = kaynak
+				}
+			</script>
+			
+<p:remoteCommand name="load1" update="pDetay" onsuccess="dDetay.show()"/>
+
+<p:dialog widgetVar="dDetay" modal="true" header="Seçilen Yayın İçin Detaylar.." 
+	 draggable="false" resizable="false"
+	width="800" height="600">
+	<p:panel  style="border:1; width:765px;" id="pDetay">
+	<p:growl id="messages" showDetail="true"  />
+	<div align="left">
+	<h:panelGrid columns="1" style="font-size:large;">
+		<h:outputText rendered="#{pc_Arama.secilenYay1n.yay1nOzel.k1tap }" value="#{pc_Arama.secilenYay1n.ktp1d.ktpAd}" />
+		<h:outputText rendered="#{pc_Arama.secilenYay1n.yay1nOzel.derg1 }" value="#{pc_Arama.secilenYay1n.drg1d.drgAd}"/>
+		<p:spacer rendered="#{pc_Arama.secilenYay1n.yay1nOzel.derg1 }" width="20" height="10"></p:spacer>
+	</h:panelGrid>
+	
+		<h:panelGrid columns="1" cellpadding="0">
+			<h:outputText rendered="#{pc_Arama.secilenYay1n.yay1nOzel.k1tap }" 
+			value="#{pc_Arama.secilenYay1n.ktp1d.ktpYazar}" style="font-size:large; font-style: italic;"  />
+			<h:panelGroup>
+				<p:rating value="#{pc_Arama.oran}" stars="10" update="pDetay"></p:rating>
+				<h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayOran}"/>
+			</h:panelGroup>
+		</h:panelGrid>
+	</div>
+		<div align="right" style="position: absolute;width:750px; top: 35px; ">
+			<h:panelGrid columns="3">
+				<p:commandButton image="ui-icon ui-icon-star" action="#{pc_Yyn_Listem.L1steyeEkle}" 
+					disabled="#{!pc_sessionBean.user}" update="pDetay">
+					<f:setPropertyActionListener target="#{pc_Yyn_Listem.kul1d }" value="#{pc_sessionBean.kullan1c1lar.kul1d}"/>
+					<f:setPropertyActionListener target="#{pc_Yyn_Listem.yyn1d }" value="#{pc_Arama.secilenYay1n.yyn1d}"/>
+				</p:commandButton>
+				<p:commandButton disabled="#{!pc_sessionBean.user}" image="ui-icon ui-icon-calendar" />
+				<p:commandButton image="ui-icon ui-icon-closethick" onclick="dDetay.hide();"/>
+			</h:panelGrid>
+			
+		</div>
+	<h:panelGrid rowClasses="rowDetay1,rowDetay2" columns="2" >
+	<p:panel style="width:230px;" id="pResim">
+		<p:graphicImage height="300" width="200" value="#{resource['images:22.jpg']}" />
+	</p:panel>
+	<p:accordionPanel style="width:500px;" autoHeight="false">  
+        <p:tab title="Yayın Bilgileri">  
+			<h:panelGrid columnClasses="colDetay1,colDetay2" columns="2" >
+	            <h:outputText value="ISBN :" />
+	            <h:outputText value="" />
+	            <h:outputText value="Yayıncı :" />
+	            <h:outputText value="Yayıncı" />
+	            <h:outputText value="Yayın yeri :" />
+	            <h:outputText value="Yayın yeri" />
+	            <h:outputText value="Yayın tarihi :" />
+	            <h:outputText value="Yayın tarihi" />
+	            <h:outputText value="Konu :" />
+	            <h:outputText value="Konu" />
+	            <h:outputText value="Süre :" />
+	            <h:outputText value="#{pc_Arama.drgSre}" />
+	            <h:outputText value="Alt tür :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.alt1d.altDeger}" />
+	            <h:outputText value="Sorumlular :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yaySorumlular}" />
+	            <h:outputText value="Fiziksel Özellikler :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayF1z1k1Oz}" />
+	            <h:outputText value="Basım Bilgileri :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayBasB1lg}" />
+	            <h:outputText value="Konu başlıkları :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayKonuBasl1k}" />
+	            <h:outputText value="Notlar :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayNotlar}" />
+	            <h:outputText value="Format :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.fmt1d.fmtDeger}" />
+	            <h:outputText value="Şekil :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.skl1d.sklDeger}" />
+	            <h:outputText value="Yaş grubu :" />
+	            <h:outputText value="#{pc_Arama.yasGrub}" />
+	            <h:outputText value="Cilt-Kopya-Sayfa :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayC1ltSay}-#{pc_Arama.secilenYay1n.ayr1d.yayKopyaSay}-#{pc_Arama.secilenYay1n.ayr1d.yaySayfa}" />
+	            <h:outputText value="Ödünç sayısı :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayOduncSay}" />
+	            <h:outputText value="URL :" />
+	         	<h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayUrl}" />   
+	        </h:panelGrid>
+	        
+	        </p:tab>
+	        <p:tab title="Konum">  
+	        	<h:panelGrid columnClasses="colDetay1,colDetay2" columns="2" >
+		        	<h:outputText value="Kütüphane :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.ktphn1d.ktphnAd}" />
+		            <h:outputText value="Bölum :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.blm1d.blmAd}" />
+		            <h:outputText value="Demirbaş :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayDem1rbas}" />
+		            <h:outputText value="Sınıflama :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayS1n1flama}" />
+		            <h:outputText value="Oda :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayOda}" />
+		            <h:outputText value="Sağlama şekli :" />
+	            	<h:outputText value="#{pc_Arama.saglmSkl}" />
+				</h:panelGrid>
+        	</p:tab>
+	        <p:tab title="Öz, Özet ve İçindekiler">
+	        	 <h:outputText value=" #{pc_Arama.secilenYay1n.ayr1d.yayOzOzet1cndklr}" escape="false"></h:outputText> 
+        	</p:tab>
+	        
+        	
+       </p:accordionPanel>
+
+	</h:panelGrid>
+	</p:panel>
+</p:dialog>
+<div align="center">
+<p:outputPanel id="panel" style="width:800px;">
+<p:dataTable id="ytable" style="width:800px;" value="#{pc_Arama.yay1nlarProList}"
+	var="yay" paginator="true" rows="10" >	 
+	
+	<p:column id="yyn1d1column" style="width:50px; text-align:center;">
+		<f:facet name="header">
+			<h:outputText styleClass="outputText" value="Sıra" id="yyn1d1text"></h:outputText>
+		</f:facet>
+		<h:outputText styleClass="outputText" id="yyn1d1"
+			value="#{yay.yay1nOzel.sira}">
+		</h:outputText>
+	</p:column>
+	<p:column id="t1p1d1column" style="width:50px; text-align:center;">
+		<f:facet name="header">
+			<h:outputText styleClass="outputText" value="Kod" id="t1p1d1text"></h:outputText>
+		</f:facet>
+		<h:outputText styleClass="outputText" id="t1p1d1"
+			value="#{yay.t1p1d}">
+		</h:outputText>
+	</p:column>
+	<p:column id="ktpAd1column" style="text-align:left;">
+		 
+		<f:facet name="header">
+			<h:outputText styleClass="outputText" value="Eser Adı / Yazarlar" id="ktpAd1text">
+			</h:outputText>
+		</f:facet>
+		<h:outputText rendered="#{yay.yay1nOzel.k1tap}" styleClass="outputText" id="ktpAd1"
+			value="#{yay.ktp1d.ktpAd} / #{yay.ktp1d.ktpYazar}">
+		</h:outputText>
+		<h:outputText rendered="#{yay.yay1nOzel.derg1}" styleClass="outputText" id="drgAd1"
+			value="D-#{yay.drg1d.drgAd}">
+		</h:outputText>
+	</p:column>
+	<p:column id="ktpAd1column1" rendered="false">
+		 
+		<f:facet name="header">
+			<h:outputText styleClass="outputText" value="Tarih" id="ktpAd1text1">
+			</h:outputText>
+		</f:facet>
+		<h:outputText  styleClass="outputText" id="tar11"
+			value="#{yay.hrk1d.l1bSonAlTar}">
+		</h:outputText>
+		
+	</p:column>
+	<p:column style="width:50px; text-align:right;">
+		<f:facet name="header">
+			<h:outputText styleClass="outputText" value="Durum" id="bilg"/>
+		</f:facet>
+		<p:graphicImage rendered="#{!yay.yay1nOzel.odunc}" value="#{resource['images:nodunc.png']}" 
+		alt="Ödünç verilmez"/>
+		<p:graphicImage rendered="#{yay.yay1nOzel.odunc}" value="#{resource['images:odunc.png']}" 
+		alt="Ödünç verilebilir"/>
+		<p:graphicImage rendered="#{!yay.yay1nOzel.rafta}" value="#{resource['images:person.png']}" 
+		alt="Ödünç Verildi"/>
+		<p:graphicImage rendered="#{yay.yay1nOzel.referans}" value="#{resource['images:ref.png']}" 
+		alt="Referan Yayın"/>
+		<p:graphicImage id="imgRaf" rendered="#{yay.yay1nOzel.rafta}" value="#{resource['images:raf16.png']}" 
+		alt="Rafta"/>
+		<p:tooltip for="imgRaf" value="RAFTA" ></p:tooltip>
+		
+	</p:column>
+	<p:column style="width:50px; text-align:center;">
+		<f:facet name="header">
+			<h:outputText styleClass="outputText" value="İşlem" id="drm1"/>
+		</f:facet>
+		<p:commandButton image="ui-icon-info" oncomplete="load1()" onclick="Doldur2(#{yay.yyn1d},'Arama:secYay1');"/>
+	</p:column>
+	
+</p:dataTable>
+</p:outputPanel>
+</div>
+
+<h:inputHidden id="secYay1" value="#{pc_global_kul_tools.yyn1d}"></h:inputHidden>
+</h:form>
+</ui:composition>

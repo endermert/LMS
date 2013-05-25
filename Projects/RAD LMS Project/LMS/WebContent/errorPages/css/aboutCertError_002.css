@@ -1,0 +1,63 @@
+html {
+  background:#eeeeee;
+}
+
+body {
+  margin: 0;
+  padding: 0 1em;
+  color: black;
+  font: message-box;
+}
+
+h1 {
+  margin: 0 0 .6em 0;
+  border-bottom: 1px solid ThreeDLightShadow;
+  font-size: 160%;
+}
+
+h2 {
+  font-size: 130%;
+}
+
+#errorPageContainer {
+  position: relative;
+  min-width: 13em;
+  max-width: 52em;
+  margin: 4em auto;
+  border: 1px solid #FFBD09; /* pale yellow extracted from yellow passport icon */
+  border-radius: 10px;
+  padding: 3em;
+  background:left 0 no-repeat white;
+  background-origin: content-box;
+}
+
+body[dir="rtl"] #errorPageContainer {
+  background-position: right 0;
+}
+
+#errorTitle {
+  -moz-margin-start: 80px;
+}
+
+#errorLongContent {
+  -moz-margin-start: 80px;
+}
+
+#technicalContent > h2, #expertContent > h2 {
+  background : url("chrome://browser/skin/section_expanded.png") left center no-repeat;
+}
+
+body[dir="rtl"] #technicalContent > h2,
+body[dir="rtl"] #expertContent > h2 {
+  background-position: right center;
+}
+
+#technicalContent[collapsed] > h2,
+#expertContent[collapsed] > h2{
+  background-image: url("chrome://browser/skin/section_collapsed.png");
+}
+
+body[dir="rtl"] #technicalContent[collapsed] > h2,
+body[dir="rtl"] #expertContent[collapsed] > h2 {
+  background-image: url("chrome://browser/skin/section_collapsed-rtl.png");
+}

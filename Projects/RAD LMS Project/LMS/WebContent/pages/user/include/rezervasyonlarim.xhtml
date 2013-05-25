@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="form1">
+	<h:panelGrid id="panel"  style="width:100%;">
+	<p:growl id="messages" showDetail="true"  />
+	<p:dataTable id="Rezerv" var="varyay1nlarList" widgetVar="yynAyrt" value="#{pc_Yyn_Goster.yynAyrt}"  
+	paginator="true" rows="10" selectionMode="single"
+	emptyMessage="Bu kategoriye uygun kayıt bulunamadı...">
+			<p:column style="width:50px; text-align: left;">
+				<f:facet name="header">
+					<h:outputText value="Sıra"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{varyay1nlarList.yay1nOzel.sira}"/>
+			</p:column>	   	   
+        	<p:column id="yynKod3column" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Kodu" id="yynKod3"></h:outputText>
+				</f:facet>
+				
+				<h:outputText styleClass="outputText" id="yyn1d3"
+					value="#{varyay1nlarList.yynKodu}">
+				</h:outputText>
+			</p:column>
+			
+			<p:column id="yyAd3column" >
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Yayın Adı" id="tyynAd3text">
+					</h:outputText>
+				</f:facet>
+				<h:outputText rendered="#{varyay1nlarList.yay1nOzel.k1tap}" styleClass="outputText" id="ktpAd3"
+					value="K-#{varyay1nlarList.ktp1d.ktpAd}">
+				</h:outputText>
+				<h:outputText rendered="#{varyay1nlarList.yay1nOzel.derg1}" styleClass="outputText" id="drgAd3"
+					value="D-#{varyay1nlarList.drg1d.drgAd}">
+				</h:outputText>
+			</p:column>
+			<p:column id="yynT0column" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="İşlem Tarihi" id="t0text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="t00"
+					value="#{varyay1nlarList.yay1nOzel.rzrv1nfo.rzv1slemTar}">
+					<f:convertDateTime type="date"></f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			<p:column id="yynT3column" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Geliş Tarihi" id="t3text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="t3"
+					value="#{varyay1nlarList.yay1nOzel.rzrv1nfo.yynGel1sTar}">
+					<f:convertDateTime type="date"></f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			<p:column id="yynT3col" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Alınacağı Tarih" id="tar3text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="tar3"
+					value="#{varyay1nlarList.yay1nOzel.rzrv1nfo.yynAlnacag1Tar}">
+					<f:convertDateTime type="date"></f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			<p:column id="yynT4col" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Sil" id="tar4text"></h:outputText>
+				</f:facet>
+				<p:commandButton image="ui-icon-trash" 
+				onclick="Rzrv1d(#{varyay1nlarList.yay1nOzel.rzrv1nfo.rzv1d},'form1:rzrv1d'); confirmation.show();"/>
+			</p:column>
+		</p:dataTable>
+	</h:panelGrid>
+	<p:confirmDialog message="Rezervasyon iptal edilsin mi?"
+				showEffect="bounce" hideEffect="explode"
+				header="İptal Onay" severity="alert" widgetVar="confirmation">
+				
+		<p:commandButton value="Evet " oncomplete="confirmation.hide()" onclick="deleteRzrv();" />
+		<p:commandButton value="Hayır " onclick="confirmation.hide()" type="button" /> 
+				
+	</p:confirmDialog>
+	<script type="text/javascript">
+		function Rzrv1d(kaynak,hedef) {
+			var field1 = document.getElementById(hedef);
+			field1.value = kaynak
+		}
+	</script>
+	<p:remoteCommand name="deleteRzrv" onsuccess="Rzrv()"  action="#{pc_Yyn_hareket.deleteYynRzrvAction}"/>
+	<p:remoteCommand name="Rzrv" update="panel"  action="#{pc_Yyn_Goster.stRzrv}"/>
+	<h:inputHidden id="rzrv1d" value="#{pc_Yyn_hareket.rzrv1d}"></h:inputHidden>
+	</h:form>
+</ui:composition>

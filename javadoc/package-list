@@ -1,0 +1,14 @@
+devendr
+entities.kullanicilar
+entities.kullanicilar.controller
+entities.yayin
+entities.yayin.controller
+entities.yayinTools
+entities.yayinTools.controller
+pagecode
+pagecode.pages
+pagecode.pages.admin.include
+pagecode.pages.include
+pagecode.pages.login
+pagecode.pages.user.include
+tools

@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:p="http://primefaces.prime.com.tr/ui">
+            
+<h:form prependId="false" >
+    <p:menu style="width:100%">  
+        <p:submenu label="MENÜ" style="width:100%" >
+        	<p:menuitem value="Kullanıcılar" url="/pages/admin/admin_kul_list.faces" icon="ui-icon ui-icon-person" />  
+        	<p:menuitem value="Kitaplar" url="/pages/admin/admin_ktp_list.faces" icon="ui-icon ui-icon-note" />
+        	<p:menuitem value="Dergiler" url="/pages/admin/admin_drg_list.faces" icon="ui-icon ui-icon-note" />
+        	<p:menuitem value="İlişkiler" url="/pages/admin/admin_yyn_hareket.faces" icon="ui-icon ui-icon-transferthick-e-w" />
+        	<p:menuitem value="Bekleyen İstekler (#{pc_Yyn_istek_yonet.bekleyenistek})" url="/pages/admin/admin_yyn_istek.faces" icon="ui-icon ui-icon-clock" />
+        </p:submenu>
+    </p:menu>
+</h:form>
+</ui:composition>

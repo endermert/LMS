@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="LMS">
+		<class>entities.kullanicilar.Kullan1c1lar</class>
+		<class>entities.kullanicilar.KulDurumlar</class>
+		<class>entities.kullanicilar.KulT1pler</class>
+		<class>entities.kullanicilar.KulYetk1ler</class>
+		<class>entities.yayin.K1taplar</class>
+		<class>entities.yayin.Derg1ler</class>
+		<class>entities.yayin.Yay1nlarReg</class>
+		<class>entities.yayin.Yay1nlar</class>
+		<class>entities.yayin.YynHareket</class>
+		<class>entities.yayinTools.D1ller</class>
+		<class>entities.yayinTools.Konular</class>
+		<class>entities.yayinTools.Yay1nc1lar</class>
+		<class>entities.yayinTools.AltT1pler</class>
+		<class>entities.yayinTools.AnaBlmDal</class>
+		<class>entities.yayinTools.BlmDal</class>
+		<class>entities.yayinTools.Enst1tuler</class>
+		<class>entities.yayinTools.Fakulteler</class>
+		<class>entities.yayinTools.Kutuphane</class>
+		<class>entities.yayinTools.Un1vers1teler</class>
+		<class>entities.yayinTools.YynFormat</class>
+		<class>entities.yayinTools.YynSek1l</class>
+		<class>entities.yayinTools.YynT1pler</class>
+		<class>entities.yayin.F1lmler</class>
+		<class>entities.yayin.Tezler</class>
+		<class>entities.yayinTools.Yyn1z1nler</class>
+		<class>entities.yayin.YynAyr1nt1Reg</class>
+		<class>entities.yayinTools.KtphnBolum</class>
+		<class>entities.yayin.YynAyr1nt1</class>
+		<class>entities.yayin.KulYynHareket</class>
+		<class>entities.yayin.Yay1nRezerveReg</class>
+		<class>entities.yayin.Yay1nRezerve</class>
+		<class>entities.yayin.L1stem</class>
+		<class>entities.yayin.L1stemReg</class>
+		<class>entities.yayin.Kul1steklerReg</class>
+		<class>entities.yayin.YynHareket4istat</class>
+		<properties>
+			<property name="openjpa.ConnectionDriverName" value="com.ibm.db2.jcc.DB2Driver"/>
+			<property name="openjpa.ConnectionURL" value="jdbc:db2://localhost:50000/LMS:retrieveMessagesFromServerOnGetMessage=true;"/>
+			<property name="openjpa.ConnectionUserName" value="db2admin"/>
+			<property name="openjpa.ConnectionPassword" value="db2admin"/>
+			<property name="openjpa.jdbc.Schema" value="LMS"/>
+		</properties>
+	</persistence-unit>
+</persistence>

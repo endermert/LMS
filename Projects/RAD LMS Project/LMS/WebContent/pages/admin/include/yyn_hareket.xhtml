@@ -1,0 +1,66 @@
+<!-- jsf:pagecode language="java" location="/src/pagecode/pages/admin/include/Yyn_hareket.java" --><!-- /jsf:pagecode --><ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form>
+	<h:panelGrid columns="2">
+	<h:panelGrid columns="2">
+	<h:outputText value="Yayın Kodu     :"></h:outputText>
+	<p:inputText value="#{pc_Yyn_hareket.yynKodu}" ></p:inputText>
+	<h:outputText value="Kullanıcı Kodu :"></h:outputText>
+	<p:inputText value="#{pc_Yyn_hareket.kulKodu}"></p:inputText>
+	</h:panelGrid>
+		<p:commandButton style="width:50;height:50px;" value="Bul" update="HrkPnl"
+			action="#{pc_Yyn_hareket.hareketeBasla}"></p:commandButton>
+	</h:panelGrid>
+		<p:panel id="HrkPnl" style="width:600px;" >
+		<p:messages id="derg1ler2messages" showDetail="true"></p:messages>
+		<h:panelGrid  columns="3">
+		<p:panel header="Yayın Bilgisi"  style="width:224px;">
+			<p:outputPanel>
+				<p:graphicImage value="#{resource['images:q.gif']}" />
+			</p:outputPanel>
+			<h:panelGrid columns="1" rendered="#{pc_Yyn_hareket.yynVar}" style="width:100px;">
+				
+				<h:panelGrid columns="1" rendered="#{pc_Yyn_hareket.yay1nlarPro.yay1nOzel.derg1}" style="text-align:center; width:200px;" >
+					<h:outputText value="#{pc_Yyn_hareket.yay1nlarPro.yynKodu}"></h:outputText>
+					<h:outputText value="#{pc_Yyn_hareket.yay1nlarPro.drg1d.drg1ssn}"></h:outputText>
+					<h:outputText value="#{pc_Yyn_hareket.yay1nlarPro.drg1d.drgAd}"></h:outputText>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="1" rendered="#{pc_Yyn_hareket.yay1nlarPro.yay1nOzel.k1tap}" style="text-align:center; width:200px;" >
+					<h:outputText value="#{pc_Yyn_hareket.yay1nlarPro.yynKodu}"></h:outputText>
+					<h:outputText value="#{pc_Yyn_hareket.yay1nlarPro.ktp1d.ktpAd}"></h:outputText>
+					<h:outputText value="#{pc_Yyn_hareket.yay1nlarPro.ktp1d.ktpYazar}"></h:outputText>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+		<h:panelGrid style="text-align: center;"  columns="1">
+			<p:commandButton  value="Yayını Ver" update="HrkPnl" action="#{pc_Yyn_hareket.createYynVermeAction}"/>
+			<p:commandButton  value="Yayını Al" update="HrkPnl" action="#{pc_Yyn_hareket.createYynAlmaAction}"/>
+			<p:commandButton  value="Süre Uzatma" update="HrkPnl" action="#{pc_Yyn_hareket.createYynSureUzAction}"/>
+			<p:commandButton  value="Rezervasyon" update="HrkPnl" action="#{pc_Yyn_hareket.createYynRezervationAction}" />
+		</h:panelGrid>
+		<p:panel header="Kullanıcı" style="width:225px;">
+			<p:outputPanel>
+				<p:graphicImage value="#{resource['images:m.gif']}" />
+			</p:outputPanel>
+			<h:panelGrid columns="1" rendered="#{pc_Yyn_hareket.kulVar}" style="text-align:center; width:200px;">
+				<h:outputText value="#{pc_Yyn_hareket.kullan1c1lar.kulKodu}"></h:outputText>
+				<h:outputText value="#{pc_Yyn_hareket.kullan1c1lar.kulAd}"></h:outputText>
+				<h:outputText value="#{pc_Yyn_hareket.kullan1c1lar.kulSoyad}"></h:outputText>
+			</h:panelGrid>
+		</p:panel>
+		</h:panelGrid>
+		</p:panel>
+		
+	</h:form>
+</ui:composition>

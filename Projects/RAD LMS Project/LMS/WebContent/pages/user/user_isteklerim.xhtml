@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:cc="http://java.sun.com/jsf/composite/components"
+	  xmlns:p="http://primefaces.prime.com.tr/ui">
+
+  <h:body> 
+
+    <ui:composition template="/templates/userLayout.xhtml">
+    
+      <ui:define name="windowTitle">LMS | Kullanıcı</ui:define> 
+	    <ui:define name="menuLeft">
+	    	<ui:include src="/pages/user/include/user_sol_bar.xhtml"></ui:include>
+	    </ui:define>
+ 
+      <ui:define name="content">
+      	<ui:include src="/pages/user/include/isteklerim.xhtml"></ui:include>
+      </ui:define>
+
+    </ui:composition>  
+  </h:body>
+</html>  

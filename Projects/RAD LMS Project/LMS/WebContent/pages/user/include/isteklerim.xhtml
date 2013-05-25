@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="form1">
+	<h:panelGrid id="panel"  style="width:100%;">
+	<p:growl id="messages" showDetail="true"  />
+	<p:dataTable id="table" var="varyay1nlarList" widgetVar="yynTbl" value="#{pc_Kul_istek.kulistekList}"  
+	paginator="true" rows="10" selectionMode="single" 
+	emptyMessage="Listeniz boş.. Hiç bir istektekte bulmamışsınız.." >
+			<p:column style="text-align: left;">
+				<f:facet name="header">
+					<h:outputText value="Yayın Adı"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{varyay1nlarList.yynAd}"/>
+			</p:column>	   
+        	<p:column style="width:60px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText value="ISSN/ISBN"/>
+				</f:facet>
+				
+				<h:outputText styleClass="outputText" id="yyn1d1"
+					value="#{varyay1nlarList.yyn1sbn1ssn}">
+				</h:outputText>
+			</p:column>
+			
+			<p:column style="width:60px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText value="İstek Tarihi" />
+				</f:facet>
+				<h:outputText value="#{varyay1nlarList.wntTar}">
+				<f:convertDateTime type="date"></f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			<p:column style="width:60px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText value="İstek Türü"/>
+				</f:facet>
+				<h:outputText value="#{varyay1nlarList.yynAc1klama}"/>
+			</p:column>
+			<p:column style="width:60px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText value="Durum"/>
+				</f:facet>
+				<h:outputText value="#{varyay1nlarList.wntDurum}"/>
+			</p:column>
+			<p:column style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText value="Sil"/>
+				</f:facet>
+				<p:commandButton image="ui-icon-trash"
+					onclick="SetWnt1d(#{varyay1nlarList.wnt1d},'form1:wnt1d'); confirmation.show();" />
+			</p:column>
+		</p:dataTable>
+		</h:panelGrid>
+		<p:confirmDialog message="İsteğiniz silinsin mi?"
+				showEffect="bounce" hideEffect="explode"
+				header="İptal Onayı" severity="alert" widgetVar="confirmation">
+					
+			<p:commandButton value="Evet "  oncomplete="confirmation.hide()" onclick="deleteWnt();" />
+			<p:commandButton value="Hayır " onclick="confirmation.hide()" type="button" /> 
+					
+		</p:confirmDialog>
+		<script type="text/javascript">
+		function SetWnt1d(kaynak,hedef) {
+			var field1 = document.getElementById(hedef);
+			field1.value = kaynak
+		}
+		</script>
+		<p:remoteCommand name="deleteWnt"  update="panel" action="#{pc_Kul_istek.isteksil}"/>
+		<h:inputHidden id="wnt1d" value="#{pc_Kul_istek.wnt1d}"/>
+	</h:form>
+</ui:composition>

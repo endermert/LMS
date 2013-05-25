@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="form1">
+	<h:panelGrid id="panel"  style="width:100%;">
+	<p:growl id="messages" showDetail="true"  />
+	<p:dataTable id="table" var="varyay1nlarList" widgetVar="yynTbl" value="#{pc_Yyn_Listem.yynGoster}"  
+	paginator="true" rows="10" selectionMode="single" 
+	emptyMessage="Listeniz boş.. Listenize hiç yayın eklememişsiniz.." >
+			<p:column style="width:50px; text-align: left;">
+				<f:facet name="header">
+					<h:outputText value="Sıra"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{varyay1nlarList.yay1nOzel.sira}"/>
+			</p:column>	   
+        	<p:column id="yynKodcolumn" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Kodu" id="yynkodtext"></h:outputText>
+				</f:facet>
+				
+				<h:outputText styleClass="outputText" id="yyn1d1"
+					value="#{varyay1nlarList.yynKodu}">
+				</h:outputText>
+			</p:column>
+			
+			<p:column id="yyAd1column" >
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Yayın Adı" id="tyynAd1text">
+					</h:outputText>
+				</f:facet>
+				<h:outputText rendered="#{varyay1nlarList.yay1nOzel.k1tap}" styleClass="outputText" id="ktpAd1"
+					value="K-#{varyay1nlarList.ktp1d.ktpAd}">
+				</h:outputText>
+				<h:outputText rendered="#{varyay1nlarList.yay1nOzel.derg1}" styleClass="outputText" id="drgAd1"
+					value="D-#{varyay1nlarList.drg1d.drgAd}">
+				</h:outputText>
+			</p:column>
+			<p:column style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText value="Sil"/>
+				</f:facet>
+				<p:commandButton image="ui-icon-trash"
+				onclick="S1lYyn1d(#{varyay1nlarList.yyn1d},'form1:s1lYyn1d'); confirmation.show();" />
+			</p:column>
+		</p:dataTable>
+		</h:panelGrid>
+		<p:confirmDialog message="Seçtiğiniz yayını listenizden silecek misiniz?"
+				showEffect="bounce" hideEffect="explode"
+				header="Silme Onayı" severity="alert" widgetVar="confirmation">
+					
+			<p:commandButton value="Evet " oncomplete="confirmation.hide()" onclick="deleteList();" />
+			<p:commandButton value="Hayır " onclick="confirmation.hide()" type="button" /> 
+					
+		</p:confirmDialog>
+		<script type="text/javascript">
+		function S1lYyn1d(kaynak,hedef) {
+			var field1 = document.getElementById(hedef);
+			field1.value = kaynak
+		}
+		</script>
+		<p:remoteCommand name="deleteList" update="panel" action="#{pc_Yyn_Listem.L1stedenSil}"/>
+		<h:inputHidden id="s1lYyn1d" value="#{pc_Yyn_Listem.yyn1d}"/>
+	</h:form>
+</ui:composition>

@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+<h:form id="wg"  >
+<p:outputPanel id="opnl">
+  <p:toolbar style="font-size: 90%;" rendered="#{pc_sessionBean.tab1}" >
+  <p:growl id="grTooll" showDetail="true"  />
+    <p:toolbarGroup align="left">
+    	<p:commandButton type="push" title="Home" action="index"  image="ui-icon-home"/>
+   		<h:outputText value="  KÜTÜPHANE YÖNETİM SİSTEMİ (LiMS)"></h:outputText>
+    </p:toolbarGroup>
+	<p:divider />
+	<p:toolbarGroup align="right" style="font-size: 80%;padding-top:3px;">
+		<p:commandButton type="push" title="Arama" action="index"  image="ui-icon-search"/>
+		<p:commandButton value="Kütüphanem" action="indexUser" image="ui-icon-bookmark"/>
+		<p:commandButton value="Hesabım" action="UserProfile" image="ui-icon-person">
+			<f:setPropertyActionListener value="#{pc_sessionBean.kullan1c1lar.kul1d}" target="#{pc_global_kul_tools.kul1d}" />
+		</p:commandButton>
+		<p:commandButton value="Yönetim" action="indexAdmin" image="ui-icon-wrench"/>
+		<p:commandButton value="Çıkış" action="#{pc_sessionBean.logoutx}" image="ui-icon ui-icon-power"/>
+	</p:toolbarGroup>
+  </p:toolbar>
+  
+  <p:toolbar style="font-size: 90%;" rendered="#{pc_sessionBean.tab2}">
+	    <p:toolbarGroup align="left">
+	    	<p:commandButton type="push" title="Home" action="index" image="ui-icon-home"/>
+	   		<h:outputText value="  KÜTÜPHANE YÖNETİM SİSTEMİ (LiMS)"></h:outputText>
+	     
+	    </p:toolbarGroup>
+		
+		
+        
+        <p:divider />
+	    	<p:toolbarGroup align="right" style="font-size: 80%;padding-top:3px;">
+		<p:commandButton type="push" title="Arama" action="index"  image="ui-icon-search"/>
+		<p:commandButton value="Kütüphanem" action="indexUser" image="ui-icon-bookmark"/>
+		<p:commandButton value="Hesabım" action="UserProfile" image="ui-icon-person">
+			<f:setPropertyActionListener value="#{pc_sessionBean.kullan1c1lar.kul1d}" target="#{pc_global_kul_tools.kul1d}" />
+		</p:commandButton>
+		<p:commandButton value="Çıkış" action="#{pc_sessionBean.logoutx}" image="ui-icon ui-icon-power"/>
+	</p:toolbarGroup>
+	  </p:toolbar>
+	
+	<p:toolbar style="font-size: 90%;" rendered="#{pc_sessionBean.tab3}">
+	    <p:toolbarGroup align="left">
+	    	<p:commandButton type="push" title="Home" action="index" image="ui-icon-home"/>
+	   		<h:outputText value="  KÜTÜPHANE YÖNETİM SİSTEMİ (LiMS)" ></h:outputText>
+	     
+	    </p:toolbarGroup>
+	
+	    <p:divider />
+	    <p:toolbarGroup align="right" style="font-size: 70%;padding-top:5px;">
+	    	<p:commandButton disabled="true" type="push" title="KA" image="ui-icon-person"/>
+	  		<p:inputText id="kulEposta" value="#{pc_sessionBean.kulEposta}" required="true" label="E-Posta"></p:inputText>
+	  		
+	  		<p:commandButton disabled="true" type="push" title="PW" image="ui-icon-key"/>
+	  		<p:password id="kulParola" value="#{pc_sessionBean.kulParola}" required="true" feedback="false" label="Parola"/>
+		   	
+	    	<p:commandButton update="opnl" action="#{pc_sessionBean.loginx}" value="Giriş" image="ui-icon-check" />
+	    </p:toolbarGroup>
+	  </p:toolbar>
+	  <div align="right">
+	  	<div align="left" style="width: 370px;">
+			<p:messages/>
+		</div>
+	  </div>
+</p:outputPanel>
+  </h:form>
+  
+</ui:composition>

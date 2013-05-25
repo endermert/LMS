@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- jsf:pagecode language="java" location="/src/pagecode/pages/YayinArama.java" --><!-- /jsf:pagecode --><html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+<link rel="stylesheet" href="../theme/Master.css" type="text/css" />
+<title>YayinArama</title>
+<meta http-equiv="Content-Type"
+	content="application/xhtml+xml; charset=UTF-8" />
+<meta name="GENERATOR"
+	content="Rational® Application Developer for WebSphere® Software" />
+	<link rel="stylesheet" type="text/css" title="Style"
+		href="../theme/stylesheet.css" />
+</h:head>
+<h:body>
+
+	<h:dataTable id="yay1nlarList1" value="#{pc_YayinArama.yay1nlarProList}"
+		var="varyay1nlarList" styleClass="dataTable" headerClass="headerClass"
+		footerClass="footerClass" rowClasses="rowClass1, rowClass2"
+		columnClasses="columnClass1" border="0" cellpadding="2"
+		cellspacing="0">
+		<h:column id="yyn1d1column">
+			<f:facet name="header">
+				<h:outputText styleClass="outputText" value="Yyn1d" id="yyn1d1text"></h:outputText>
+			</f:facet>
+			
+			<h:outputText styleClass="outputText" id="yyn1d1"
+				value="#{varyay1nlarList.yyn1d}">
+			</h:outputText>
+		</h:column>
+		<h:column id="t1p1d1column">
+			<f:facet name="header">
+				<h:outputText styleClass="outputText" value="T1p1d" id="t1p1d1text"></h:outputText>
+			</f:facet>
+			<h:outputText styleClass="outputText" id="t1p1d1"
+				value="#{varyay1nlarList.t1p1d}">
+			</h:outputText>
+		</h:column>
+		<h:column id="ktpAd1column">
+			 
+			<f:facet name="header">
+				<h:outputText styleClass="outputText" value="KtpAd" id="ktpAd1text">
+				</h:outputText>
+			</f:facet>
+			<h:outputText rendered="#{varyay1nlarList.yay1nOzel.k1tap}" styleClass="outputText" id="ktpAd1"
+				value="K-#{varyay1nlarList.ktp1d.ktpAd}">
+			</h:outputText>
+			<h:outputText rendered="#{varyay1nlarList.yay1nOzel.derg1}" styleClass="outputText" id="drgAd1"
+				value="D-#{varyay1nlarList.drg1d.drgAd}">
+			</h:outputText>
+		</h:column>
+		<h:column id="ktpAd1column1">
+			 
+			<f:facet name="header">
+				<h:outputText styleClass="outputText" value="Tarih" id="ktpAd1text1">
+				</h:outputText>
+			</f:facet>
+			<h:outputText  styleClass="outputText" id="tar11"
+				value="#{varyay1nlarList.hrk1d.l1bSonAlTar}">
+			</h:outputText>
+			
+		</h:column>
+		
+	</h:dataTable>
+</h:body>
+</html>

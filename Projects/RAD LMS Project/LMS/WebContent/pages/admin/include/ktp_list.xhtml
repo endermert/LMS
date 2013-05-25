@@ -1,0 +1,85 @@
+
+<!-- jsf:pagecode language="java" location="/src/pagecode/pages/admin/include/Ktp_list.java" --><!-- /jsf:pagecode -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="ktpList">
+	<p:menubar>
+        	<p:menuitem value="Kitap Ekle" url="/pages/admin/admin_ktp_ekle.faces" icon="ui-icon ui-icon-plusthick"></p:menuitem>
+        	<p:menuitem value="Yenile" update="panel"  icon="ui-icon ui-icon-refresh"></p:menuitem>
+	</p:menubar>
+	
+	<h:panelGrid id="panel" style="width: 100%;">
+	<p:growl id="messages" showDetail="true"  />
+	<p:dataTable id="table" var="vark1taplarList" widgetVar="kulTable" value="#{pc_Ktp_list.k1taplarList}" 
+	paginator="true" rows="10" selectionMode="single" >	   
+
+        <p:column id="ktpKodu1column" filterBy="#{vark1taplarList.ktpKodu}" style="width: 100px;" >
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Kod"
+						id="ktpKodu1text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="ktpKodu1"
+					value="#{vark1taplarList.ktpKodu}">
+				</h:outputText>
+			</p:column>
+			<p:column id="ktp1sbn1column" filterBy="#{vark1taplarList.ktp1sbn}" style="width: 100px;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="ISBN"
+						id="ktp1sbn1text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="ktp1sbn1"
+					value="#{vark1taplarList.ktp1sbn}">
+				</h:outputText>
+			</p:column>
+			<p:column id="ktpAd1column" filterBy="#{vark1taplarList.ktpAd}">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Başlık" id="ktpAd1text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="ktpAd1"
+					value="#{vark1taplarList.ktpAd}">
+				</h:outputText>
+			</p:column>
+			<p:column id="ktpYazar1column" filterBy="#{vark1taplarList.ktpYazar}">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Yazar"
+						id="ktpYazar1text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="ktpYazar1"
+					value="#{vark1taplarList.ktpYazar}">
+				</h:outputText>
+			</p:column>
+			<p:column  style="width: 60px;">
+			<f:facet name="header" >
+                <h:outputText value="İşlem" />
+            </f:facet>            
+            <p:commandButton action="gitKtpDuzelt" image="ui-icon ui-icon-pencil">
+				<f:setPropertyActionListener value="#{vark1taplarList.ktp1d}" target="#{pc_global_kul_tools.ktp1d}" />
+			</p:commandButton>
+			<p:commandButton oncomplete="confirmation.show()" image="ui-icon ui-icon-trash">
+				<f:setPropertyActionListener value="#{vark1taplarList.ktp1d}" target="#{pc_global_kul_tools.ktp1d}" />
+			</p:commandButton>						
+			
+        </p:column>
+		</p:dataTable>
+	</h:panelGrid>
+	<p:confirmDialog message="Silme işlemine devamedece misiniz?"
+				showEffect="bounce" hideEffect="explode"
+				header="Siliniyor..." severity="alert" widgetVar="confirmation">
+				
+		<p:commandButton value="Evet" update="panel" onclick="confirmation.hide()"
+					action="#{pc_Ktp_duzelt.deleteK1taplarAction}" />
+		<p:commandButton value="Hayır" onclick="confirmation.hide()" type="button" /> 
+				
+	</p:confirmDialog>
+	</h:form>
+</ui:composition>

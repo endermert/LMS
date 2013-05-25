@@ -1,0 +1,26 @@
+<!-- jsf:pagecode language="java" location="/src/pagecode/pages/login/Login_frm.java" --><!-- /jsf:pagecode --><ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	 <h:form>
+      		<div >
+		   		<div><h:graphicImage alt="wait" value="#{resource['images:login.png']}" />
+			</div>
+		   		<div style="position: absolute; left: 130px; top: 145px;">
+		   			<p:inputText id="kulEposta" value="#{pc_sessionBean.kulEposta}" required="true" label="E-Posta"
+		   			style="width: 250px;"></p:inputText>
+		   		</div>
+		   		<div style="position: absolute; left: 130px; top: 202px;">
+		   			<p:password id="kulParola" value="#{pc_sessionBean.kulParola}" required="true" label="Parola"
+		   			weakLabel="Kolay" goodLabel="İyi" strongLabel="Güçlü" promptLabel="Parolanızı Girin.." ></p:password>
+		   		</div>
+		   		<div style="position: absolute; left: 330px; top: 230px;">
+		   			<p:commandButton ajax="false" value="Login" action="#{pc_sessionBean.loginx}" 
+		   				onsuccess="window.location='/LMS/pages/user/index.faces';"></p:commandButton> 
+		   		</div>
+		   		<div style="position: absolute; left: 390px; top: 145px;"><p:message for="kulEposta" display="icon"></p:message></div>
+		   		<div style="position: absolute; left: 390px; top: 202px;"><p:message for="kulParola" display="icon"></p:message></div>
+		   	</div>
+	</h:form>
+</ui:composition>

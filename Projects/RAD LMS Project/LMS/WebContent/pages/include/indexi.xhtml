@@ -1,0 +1,208 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+<h:form id="Arama">
+<p:outputPanel id="panel">
+	<link rel="stylesheet" href="include/styles/main.css" />
+    <script src="include/scripts/plugins.js" type="text/javascript"></script>
+    <script src="include/scripts/main.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="include/shine/styles.css"></link>
+	<script type="text/javascript" src="include/shine/js/cufon-yui.js"></script>
+	<script type="text/javascript" src="include/shine/fonts/aura_400.font.js"></script>
+
+		<script type="text/javascript">
+				jQuery(document).ready(function($){
+					$( "#radio1" ).buttonset().mouseout(function(){hoverYukle();}).hover(function(){hoverYukle();});
+					$( "#radio2" ).buttonset().mouseout(function(){hoverYukle();}).hover(function(){hoverYukle();});
+					$("#site").hover(function(){hoverYukle();});
+					$("#demo").hover(function(){hoverYukle();});
+					hoverYukle();
+				});
+				
+				function hoverYukle(){
+					jQuery(document).ready(function($){
+						$('.thumb_container').hover(function()
+						 {  
+					         $(this).find(".large_thumb").stop().animate({marginLeft:0, marginTop:-7},200);
+							 $(this).find(".large_thumb_shine").stop();
+					         $(this).find(".large_thumb_shine").css("marginLeft","-155px"); 
+					         $(this).find(".large_thumb_shine").animate({marginLeft:300},800);
+						 }, function()
+						 {
+						    $(this).find(".large_thumb").stop().animate({marginLeft:0, marginTop:0},200);
+						 });
+					});
+				}
+				function Doldur2(kaynak,hedef) {
+   					var field1 = document.getElementById(hedef);
+					field1.value = kaynak
+				}
+			</script>
+		<div id="wrapper" class="ui-corner-all" align="center" style="width: 1000px;">
+		<div id="site" class="site ui-corner-all">
+
+		<ul class="splitter" style="width: 1000px;">
+			<li style="width: 1010px; margin-left: -400px;" >
+			<ul>
+				<div id="radio1">
+					<li class="segment-1 selected-1">
+						<img class="ui-icon-disk" src="" alt="" />
+						<a href="#" data-value="all">Tümü</a></li>
+					<li class="segment-0"><a href="#" data-value="1">Kitaplar</a></li>
+					<li class="segment-2"><a href="#" data-value="2">Dergiler</a></li>
+				</div>
+			</ul>
+			</li>
+			<li>
+			<ul>
+				<div id="radio2">
+					<li class="segment-1 selected-1">
+						<a href="#" data-value="name">İsme Göre Sırala</a></li>
+					<li class="segment-2"><a href="#" data-value="size">Tarihe Göre Sırala</a></li>
+				</div>
+			</ul>
+			</li>
+		</ul>
+
+		<div class="demo" >
+		<ul id="list" class="image-grid">
+			<ui:repeat value="#{pc_Arama.yay1nlarProList}" var="k">
+				<li data-id="ynn1d#{k.yyn1d}" class="#{k.t1p1d}">
+					<div class="thumb_container" onclick="Doldur2(#{k.yyn1d},'Arama:secYay1'); load1();"> 
+                            <div class="large_thumb" onclick="Doldur2(#{k.yyn1d},'Arama:secYay1'); load1();"> 
+                    			<strong style="visibility: hidden;"></strong> <span style="visibility: hidden;"></span>    
+								<img src="../resources/images/uploads/#{k.ayr1d.yayRes1m1}" 
+								class="large_thumb_image" width="100" height="150" alt="" style="cursor:pointer;"
+								 onclick="Doldur2(#{k.yyn1d},'Arama:secYay1'); load1();"/> 
+                                <div class="large_thumb_shine" style="cursor:pointer;" 
+                                onclick="Doldur2(#{k.yyn1d},'Arama:secYay1'); load1();" ></div>
+                            </div>
+					</div>
+				</li>
+			</ui:repeat>
+		</ul>
+		</div>
+
+		</div>
+		</div>
+</p:outputPanel>
+			
+<p:remoteCommand name="load1" update="pDetay" onsuccess="dDetay.show()"/>
+
+<p:dialog widgetVar="dDetay" modal="true" header="Seçilen Yayın İçin Detaylar.." 
+	 draggable="false" resizable="false"
+	width="800" height="600">
+	<p:panel  style="border:1; width:765px;" id="pDetay">
+	<p:growl id="messages" showDetail="true"  />
+	<div align="left" >
+	<h:panelGrid columns="1" style="font-size:large;">
+		<h:outputText rendered="#{pc_Arama.secilenYay1n.yay1nOzel.k1tap }" value="#{pc_Arama.secilenYay1n.ktp1d.ktpAd}" />
+		<h:outputText rendered="#{pc_Arama.secilenYay1n.yay1nOzel.derg1 }" value="#{pc_Arama.secilenYay1n.drg1d.drgAd}"/>
+		<p:spacer rendered="#{pc_Arama.secilenYay1n.yay1nOzel.derg1 }" width="20" height="10"></p:spacer>
+	</h:panelGrid>
+	
+		<h:panelGrid columns="1" cellpadding="0">
+			<h:outputText rendered="#{pc_Arama.secilenYay1n.yay1nOzel.k1tap }" 
+			value="#{pc_Arama.secilenYay1n.ktp1d.ktpYazar}" style="font-size:large;font-style: italic;" />
+			<h:panelGroup>
+				<p:rating value="#{pc_Arama.oran}" stars="10" update="pDetay"></p:rating>
+				<h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayOran}"/>
+			</h:panelGroup>
+		</h:panelGrid>
+	</div>
+		<div align="right" style="position: absolute;width:750px; top: 35px; ">
+			<h:panelGrid columns="3">
+				<p:commandButton image="ui-icon ui-icon-star" action="#{pc_Yyn_Listem.L1steyeEkle}" 
+					disabled="#{!pc_sessionBean.user}" update="pDetay">
+					<f:setPropertyActionListener target="#{pc_Yyn_Listem.kul1d }" value="#{pc_sessionBean.kullan1c1lar.kul1d}"/>
+					<f:setPropertyActionListener target="#{pc_Yyn_Listem.yyn1d }" value="#{pc_Arama.secilenYay1n.yyn1d}"/>
+				</p:commandButton>
+				<p:commandButton disabled="#{!pc_sessionBean.user}" image="ui-icon ui-icon-calendar" />
+				<p:commandButton image="ui-icon ui-icon-closethick" onclick="dDetay.hide();"/>
+			</h:panelGrid>
+			
+		</div>
+	<h:panelGrid rowClasses="rowDetay1,rowDetay2" columns="2" >
+	<p:panel style="width:230px;" id="pResim">
+		<p:graphicImage height="300" width="200" value="#{resource['images:22.jpg']}" />
+	</p:panel>
+	<p:accordionPanel style="width:500px;" autoHeight="false">  
+        <p:tab title="Yayın Bilgileri">  
+			<h:panelGrid columnClasses="colDetay1,colDetay2" columns="2" >
+	            <h:outputText value="ISBN :" />
+	            <h:outputText value="" />
+	            <h:outputText value="Yayıncı :" />
+	            <h:outputText value="Yayıncı" />
+	            <h:outputText value="Yayın yeri :" />
+	            <h:outputText value="Yayın yeri" />
+	            <h:outputText value="Yayın tarihi :" />
+	            <h:outputText value="Yayın tarihi" />
+	            <h:outputText value="Konu :" />
+	            <h:outputText value="Konu" />
+	            <h:outputText value="Süre :" />
+	            <h:outputText value="#{pc_Arama.drgSre}" />
+	            <h:outputText value="Alt tür :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.alt1d.altDeger}" />
+	            <h:outputText value="Sorumlular :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yaySorumlular}" />
+	            <h:outputText value="Fiziksel Özellikler :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayF1z1k1Oz}" />
+	            <h:outputText value="Basım Bilgileri :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayBasB1lg}" />
+	            <h:outputText value="Konu başlıkları :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayKonuBasl1k}" />
+	            <h:outputText value="Notlar :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayNotlar}" />
+	            <h:outputText value="Format :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.fmt1d.fmtDeger}" />
+	            <h:outputText value="Şekil :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.skl1d.sklDeger}" />
+	            <h:outputText value="Yaş grubu :" />
+	            <h:outputText value="#{pc_Arama.yasGrub}" />
+	            <h:outputText value="Cilt-Kopya-Sayfa :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayC1ltSay}-#{pc_Arama.secilenYay1n.ayr1d.yayKopyaSay}-#{pc_Arama.secilenYay1n.ayr1d.yaySayfa}" />
+	            <h:outputText value="Ödünç sayısı :" />
+	            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayOduncSay}" />
+	            <h:outputText value="URL :" />
+	         	<h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayUrl}" />   
+	        </h:panelGrid>
+	        
+	        </p:tab>
+	        <p:tab title="Konum">  
+	        	<h:panelGrid columnClasses="colDetay1,colDetay2" columns="2" >
+		        	<h:outputText value="Kütüphane :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.ktphn1d.ktphnAd}" />
+		            <h:outputText value="Bölum :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.blm1d.blmAd}" />
+		            <h:outputText value="Demirbaş :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayDem1rbas}" />
+		            <h:outputText value="Sınıflama :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayS1n1flama}" />
+		            <h:outputText value="Oda :" />
+		            <h:outputText value="#{pc_Arama.secilenYay1n.ayr1d.yayOda}" />
+		            <h:outputText value="Sağlama şekli :" />
+	            	<h:outputText value="#{pc_Arama.saglmSkl}" />
+				</h:panelGrid>
+        	</p:tab>
+	        <p:tab title="Öz, Özet ve İçindekiler">
+	        	 <h:outputText value=" #{pc_Arama.secilenYay1n.ayr1d.yayOzOzet1cndklr}" escape="false"></h:outputText> 
+        	</p:tab>
+	        
+        	
+       </p:accordionPanel>
+
+	</h:panelGrid>
+	</p:panel>
+</p:dialog>
+<h:inputHidden id="secYay1" value="#{pc_global_kul_tools.yyn1d}"></h:inputHidden>
+</h:form>
+</ui:composition>

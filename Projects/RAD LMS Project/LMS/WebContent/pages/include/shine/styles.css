@@ -1,0 +1,5 @@
+
+.large_thumb	{float:left; position: relative; width:100px; height:160px; padding:0px 10px 0px 0;}
+img.large_thumb_image	{position:absolute; left:0px; top:7px;}
+.large_thumb_shine	{width:100px; height:160px; background:url('images/interface/shinee.png'); position:absolute; background-position:0px 0; left:-155px; top:7px; background-repeat:no-repeat;}
+.thumb_container {width:100px; height:160px; overflow: inherit;}

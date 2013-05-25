@@ -1,0 +1,78 @@
+﻿@charset "UTF-8";
+
+.splitter {
+  margin: 0px 0px 90px 0px;
+  text-align: center;
+  padding: 10px 0px 5px;
+  font-size: 12px;
+}
+
+.splitter li,
+.splitter ul,
+.splitter ul li a  {
+  display: inline;
+  display: inline-block;
+  line-height: 1;
+}
+
+.splitter ul li a {
+  padding: 5px 8px 6px;
+}
+
+
+.site{
+background-image: url('../images/raflar.jpg'); 
+background-repeat: no-repeat;
+}
+
+.demo p,
+.demo ul {
+  margin-right: 0;
+}
+
+#performance-toggle {
+  text-align: center;
+  margin-right: 0;
+  font-size: 11px;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
+}
+
+#performance-toggle:hover {
+  opacity: 0.999;
+}
+
+.image-grid {
+  margin: -20px 0 0 -40px;
+  padding-left: 48px;
+  width: 1000px;
+}
+
+.image-grid:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+  clear: both;
+}
+
+.image-grid li {
+  width: 100px;
+  margin: 0px 0 40px 55px;
+  float: left;
+  text-align: center;
+  font-family: "Helvetica Neue", sans-serif;
+  line-height: 17px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.image-grid li img,
+.image-grid li strong {
+  display: block;
+}
+
+.image-grid li strong {
+  color: #fff;
+}

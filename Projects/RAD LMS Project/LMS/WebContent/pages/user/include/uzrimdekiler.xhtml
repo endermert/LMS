@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="form1">
+	<h:panelGrid id="panel"  style="width:100%;">
+	<p:growl id="messages" showDetail="true"  />
+	<p:dataTable id="table" var="varyay1nlarList" widgetVar="yynTbl" value="#{pc_Yyn_Goster.yynUzerimde}"  
+	paginator="true" rows="10" selectionMode="single" 
+	emptyMessage="Bu kategoriye uygun kayıt bulunamadı..." >
+			<p:column style="width:50px; text-align: left;">
+				<f:facet name="header">
+					<h:outputText value="Sıra"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{varyay1nlarList.yay1nOzel.sira}"/>
+			</p:column>	   
+        	<p:column id="yynKodcolumn" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Kodu" id="yynkodtext"></h:outputText>
+				</f:facet>
+				
+				<h:outputText styleClass="outputText" id="yyn1d1"
+					value="#{varyay1nlarList.yynKodu}">
+				</h:outputText>
+			</p:column>
+			
+			<p:column id="yyAd1column" >
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Yayın Adı" id="tyynAd1text">
+					</h:outputText>
+				</f:facet>
+				<h:outputText rendered="#{varyay1nlarList.yay1nOzel.k1tap}" styleClass="outputText" id="ktpAd1"
+					value="K-#{varyay1nlarList.ktp1d.ktpAd}">
+				</h:outputText>
+				<h:outputText rendered="#{varyay1nlarList.yay1nOzel.derg1}" styleClass="outputText" id="drgAd1"
+					value="D-#{varyay1nlarList.drg1d.drgAd}">
+				</h:outputText>
+			</p:column>
+			<p:column id="yynT11column" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Alınan Tarih" id="t11text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="t11"
+					value="#{varyay1nlarList.hrk1d.l1bVerTar}">
+					<f:convertDateTime type="date"></f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			<p:column id="yynT12column" style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Son İade Tarihi" id="t12text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="t12"
+					value="#{varyay1nlarList.hrk1d.l1bSonAlTar}">
+					<f:convertDateTime type="date"></f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			<p:column style="width:50px; text-align: center;">
+				<f:facet name="header">
+					<h:outputText value="Süre Uzat"/>
+				</f:facet>
+				<p:commandButton image="ui-icon-clock"
+				onclick="SetYyn1d(#{varyay1nlarList.yyn1d},'form1:Yyn1d'); confirmation.show();" />
+			</p:column>
+		</p:dataTable>
+		</h:panelGrid>
+		<p:confirmDialog message="Süre Uzatma isteği göndermek isiyor musunuz?"
+				showEffect="bounce" hideEffect="explode"
+				header="Süre Uzat" severity="alert" widgetVar="confirmation">
+					
+			<p:commandButton value="Evet " onclick="confirmation.hide(); sureiste();" />
+			<p:commandButton value="Hayır " onclick="confirmation.hide()" type="button" /> 
+					
+		</p:confirmDialog>
+		<script type="text/javascript">
+		function SetYyn1d(kaynak,hedef) {
+			var field1 = document.getElementById(hedef);
+			field1.value = kaynak
+		}
+		</script>
+		<p:remoteCommand name="sureiste" update="panel" action="#{pc_Kul_istek.Sureistek}"/>
+		<h:inputHidden id="Yyn1d" value="#{pc_Kul_istek.yyn1d}"/>
+	</h:form>
+</ui:composition>

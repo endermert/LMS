@@ -1,0 +1,337 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+<h:form id="Bar" >
+		<script type="text/javascript">
+				function Doldur(kaynak,hedef) {
+   					var field1 = document.getElementById(kaynak);
+   					var field2 = document.getElementById(hedef);
+					field2.value = field1.value
+				}
+				function TopluDoldur() {
+					Doldur('ktphn1d1','Bar:kth1d1');
+					Doldur('yayBolum1','Bar:blm1d1');
+					Doldur('ktpKonu1','Bar:kn1d1');
+					Doldur('alt1d1','Bar:alt1');
+					Doldur('fmt1d1','Bar:frmt1');
+					Doldur('skl1d1','Bar:skl1');
+					Doldur('ktpD1l1','Bar:d1l1');
+					Doldur('kriter1','Bar:kriterNo');
+				}
+			</script>
+<div align="center">
+<p:outputPanel id="panel" style="font-size: 100%;">
+		
+	<p:panel rendered="#{pc_ABar.detaySec}">
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+					$('select#ktphn1d1').selectmenu({style:'dropdown'});
+					$('select#yayBolum1').selectmenu({style:'dropdown'});
+					$('select#ktpKonu1').selectmenu({style:'dropdown'});
+					
+					$('select#alt1d1').selectmenu({style:'dropdown'});
+					$('select#fmt1d1').selectmenu({style:'dropdown'});
+					$('select#skl1d1').selectmenu({style:'dropdown'});
+					$('select#ktpD1l1').selectmenu({style:'dropdown'});
+					
+				});
+				
+			</script>
+	<h:panelGrid columns="7" style="text-align:center;"
+	cellspacing="1" cellpadding="1">
+		
+		
+		<h:outputLabel value="Kütüphane" for="ktphn1d1" />
+		<h:outputLabel value="Bölüm" for="yayBolum1" />
+		<h:outputLabel value="Konu" for="ktpKonu1" />
+		
+			
+				
+		<h:outputLabel value="Alt Konu/Tür" for="alt1d1"/>
+		<h:outputLabel value="Format" for="fmt1d1"/>
+		<h:outputLabel value="Şekil" for="skl1d1"/>
+		<h:outputLabel value="Dil" for="ktpD1l1"/>
+	
+		<p:outputPanel>
+			<select name="ktphn1d1" id="ktphn1d1" style="width:200px;" onchange="Doldur('ktphn1d1','Bar:kth1d1');" >
+				<option value="0" selected="selected" >Tümü</option>
+				<ui:repeat value="#{pc_global_kul_tools.kutuphaneler}" var="kth">
+					<option value="#{kth.ktphn1d}" >#{kth.ktphnAd}</option>
+				</ui:repeat>
+			</select>
+		</p:outputPanel>
+		
+		<p:outputPanel>
+			<select name="yayBolum1" id="yayBolum1" style="width:200px;" onchange="Doldur('yayBolum1','Bar:blm1d1');" >
+				<option value="0" selected="selected" >Tümü</option>
+				<ui:repeat value="#{pc_global_kul_tools.ktphnBolum}" var="blm">
+					<option value="#{blm.blm1d}" >#{blm.blmAd}</option>
+				</ui:repeat>
+			</select>
+		</p:outputPanel>
+		
+		<p:outputPanel>
+			<select name="ktpKonu1" id="ktpKonu1" style="width:200px;" onchange="Doldur('ktpKonu1','Bar:kn1d1');" >
+				<option value="0" selected="selected" >Tümü</option>
+				<ui:repeat value="#{pc_global_kul_tools.konularList}" var="kon">
+					<option value="#{kon.kon1d}" >#{kon.konAd}</option>
+				</ui:repeat>
+			</select>
+		</p:outputPanel>
+		 
+	
+		
+		<p:outputPanel>
+			<select name="alt1d1" id="alt1d1" style="width:150px;" onchange="Doldur('alt1d1','Bar:alt1');" >
+				<option value="0" selected="selected" >Tümü</option>
+				<ui:repeat value="#{pc_global_kul_tools.ktpAltT1pler}" var="alt">
+					<option value="#{alt.alt1d}" >#{alt.altDeger}</option>
+				</ui:repeat>
+			</select>
+		</p:outputPanel>
+		
+		<p:outputPanel>
+			<select name="fmt1d1" id="fmt1d1" style="width:150px;" onchange="Doldur('fmt1d1','Bar:frmt1');" >
+				<option value="0" selected="selected" >Tümü</option>
+				<ui:repeat value="#{pc_global_kul_tools.yynFormat}" var="fmt">
+					<option value="#{fmt.fmt1d}" >#{fmt.fmtDeger}</option>
+				</ui:repeat>
+			</select>
+		</p:outputPanel>
+		
+		<p:outputPanel>
+			<select name="skl1d1" id="skl1d1" style="width:150px;" onchange="Doldur('skl1d1','Bar:skl1');" >
+				<option value="0" selected="selected" >Tümü</option>
+				<ui:repeat value="#{pc_global_kul_tools.yynSekil}" var="skl">
+					<option value="#{skl.skl1d}" >#{skl.sklDeger}</option>
+				</ui:repeat>
+			</select>
+		</p:outputPanel>
+		
+		<p:outputPanel>
+			<select name="ktpD1l1" id="ktpD1l1" style="width:150px;" onchange="Doldur('ktpD1l1','Bar:d1l1');" >
+				<option value="0" selected="selected" >Tümü</option>
+				<ui:repeat value="#{pc_global_kul_tools.d1llerList}" var="dil">
+					<option value="#{dil.d1l1d}" >#{dil.d1lAd}</option>
+				</ui:repeat>
+			</select>
+		</p:outputPanel>
+		
+		</h:panelGrid>
+		</p:panel>
+	
+		<p:panel id="pnlK1tap" header="Kitap Ara" visible="#{pc_ABar.k1tapSec}" style="margin-top:2px;" >
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+				
+					$('select#yynTar').selectmenu({style:'dropdown'});
+					
+				});
+			</script>
+			
+			<h:panelGrid columns="4" >
+			<h:panelGrid columns="2" cellspacing="10">
+				<h:outputText value="Kitap Kodu"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktpkod }"></p:inputText>
+				<h:outputText value="Kitap Adı"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktpad}"></p:inputText>
+				<h:outputText  value="Yazar"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktpYazar }"></p:inputText>
+				
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2" cellspacing="10">
+				<h:outputText value="ISBN"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktp1sbn }"></p:inputText>
+				<h:outputText value="Sorumlular"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktpsorml }"></p:inputText>
+				<h:outputText value="Sınıflama"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktps1nf }"></p:inputText>
+			</h:panelGrid>
+			<h:panelGrid columns="2" cellspacing="10">
+				<h:outputText value="Öz,Özet"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktpozet }"></p:inputText>
+				<h:outputText value="Konu Başlıkları"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktpknB }"></p:inputText>
+				<h:outputText value="Anahtar Kelimeler"></h:outputText>
+				<p:inputText value="#{pc_Arama.ktpahk }"></p:inputText>
+			</h:panelGrid>
+			<h:panelGrid columns="1" cellspacing="10">
+				<p:outputPanel>
+					<select name="yynTar" id="yynTar" style="width:150px;" onchange="Doldur('yynTar','Bar:tarSec1');" >
+						<option value="0" selected="selected"  >Yayın Tarihi</option>
+						<option value="1" >Önce</option>
+						<option value="2" >Sonra</option>
+					</select>
+				</p:outputPanel>
+				<p:calendar title="Yayın Tarihi" pattern="dd.mm.yyyy" value="#{pc_Arama.yynTar1 }" ></p:calendar>
+				
+			</h:panelGrid>
+			</h:panelGrid>
+			
+		</p:panel>
+		
+		<p:panel id="pnlderg1" header="Derg1 Ara" visible="#{pc_ABar.derg1Sec}" style="margin-top:2px;" >
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+				
+					$('select#yynTar2').selectmenu({style:'dropdown'});
+					$('select#drgSr').selectmenu({style:'dropdown'});
+					
+				});
+			</script>
+			
+			<h:panelGrid columns="4" >
+			<h:panelGrid columns="2" cellspacing="10">
+				<h:outputText value="Dergi Kodu"></h:outputText>
+				<p:inputText value="#{pc_Arama.drgkod}"></p:inputText>
+				<h:outputText value="Dergi Adı"></h:outputText>
+				<p:inputText value="#{pc_Arama.drgad}"></p:inputText>
+				<h:outputText value="ISSN"></h:outputText>
+				<p:inputText value="#{pc_Arama.drg1ssn}"></p:inputText>
+				
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2" cellspacing="10">
+				
+				<h:outputText value="Sorumlular"></h:outputText>
+				<p:inputText value="#{pc_Arama.drgsorml }"></p:inputText>
+				<h:outputText value="Sınıflama"></h:outputText>
+				<p:inputText value="#{pc_Arama.drgs1nf }"></p:inputText>
+				<h:outputText  value="Süre"></h:outputText>
+				<p:outputPanel>
+					<select name="drgSr" id="drgSr" onchange="Doldur('drgSr','Bar:drgSure1');" >
+						<ui:repeat value="#{pc_global_kul_tools.drgSr}" var="drg">
+							<option value="#{drg.slctVl}" >#{drg.slctLbl}</option>
+						</ui:repeat>
+					</select>								
+				</p:outputPanel>
+			</h:panelGrid>
+			<h:panelGrid columns="2" cellspacing="10">
+				<h:outputText value="Öz,Özet,içerik"></h:outputText>
+				<p:inputText value="#{pc_Arama.drgozet }"></p:inputText>
+				<h:outputText value="Konu Başlıkları"></h:outputText>
+				<p:inputText value="#{pc_Arama.drgknB }"></p:inputText>
+				<h:outputText value="Anahtar Kelimeler"></h:outputText>
+				<p:inputText value="#{pc_Arama.drgahk }"></p:inputText>
+			</h:panelGrid>
+			<h:panelGrid columns="1" cellspacing="10">
+				<p:outputPanel>
+					<select name="yynTar2" id="yynTar2" style="width:150px;" onchange="Doldur('yynTar2','Bar:tarSec2');" >
+						<option value="0" selected="selected"  >Yayın Tarihi</option>
+						<option value="1" >Önce</option>
+						<option value="2" >Sonra</option>
+					</select>
+				</p:outputPanel>
+				<p:calendar title="Yayın Tarihi" pattern="dd.mm.yyyy" value="#{pc_Arama.yynTar2}" ></p:calendar>
+				
+			</h:panelGrid>
+			</h:panelGrid>
+			
+		</p:panel>
+			
+			<script type="text/javascript">
+				
+				jQuery(document).ready(function($){
+							
+					$('select#kriter1').selectmenu({style:'dropdown'});
+				});
+				
+			</script>
+		
+		<p:panel visible="#{pc_ABar.k1tapSec}" style="border:0;"  >
+			<p:commandButton image="ui-icon-search" action="#{pc_Arama.K1tapArama}" 
+			update="Arama:panel" value="Ara" />
+			<p:commandButton image="ui-icon-arrowthick-1-w" action="#{pc_Arama.Tem1zle}" onclick="Tem1zle2()" value="Temizle" />
+			<p:menuButton  value="Seçenekler">
+				<p:menuitem value="Basit Arama" update="panel" action="#{pc_ABar.secBasit}" icon="ui-icon ui-icon-circle-zoomin"/>
+	        	<p:menuitem value="Detaylı Arama" update="panel" action="#{pc_ABar.secDetay}" icon="ui-icon ui-icon-circle-zoomin"/>
+	        	<p:menuitem value="Kitap Arama" update="panel"  action="#{pc_ABar.secK1tap}" icon="ui-icon ui-icon-circle-zoomin"/>
+	            <p:menuitem value="Dergi Arama" update="panel"  action="#{pc_ABar.secDerg1}" icon="ui-icon ui-icon-circle-zoomin" />
+	            <p:menuitem value="Liste Görünümü" url="index.faces"  icon="ui-icon ui-icon-script" />
+	            <p:menuitem value="Raf Görünümü" url="indexi.faces" icon="ui-icon ui-icon-calculator" />
+	       </p:menuButton>
+		</p:panel>
+		
+		<p:panel visible="#{pc_ABar.derg1Sec}" style="border:0;"  >
+			<p:commandButton image="ui-icon-search" action="#{pc_Arama.Derg1Arama}" 
+			update="Arama:panel" value="Ara" />
+			<p:commandButton image="ui-icon-arrowthick-1-w"  onclick="Tem1zle3()" value="Temizle" />
+			<p:menuButton  value="Seçenekler">
+				<p:menuitem value="Basit Arama" update="panel" action="#{pc_ABar.secBasit}" icon="ui-icon ui-icon-circle-zoomin"/>
+	        	<p:menuitem value="Detaylı Arama" update="panel" action="#{pc_ABar.secDetay}" icon="ui-icon ui-icon-circle-zoomin"/>
+	        	<p:menuitem value="Kitap Arama" update="panel"  action="#{pc_ABar.secK1tap}" icon="ui-icon ui-icon-circle-zoomin"/>
+	            <p:menuitem value="Dergi Arama" update="panel"  action="#{pc_ABar.secDerg1}" icon="ui-icon ui-icon-circle-zoomin" />
+	            <p:menuitem value="Liste Görünümü" url="index.faces"  icon="ui-icon ui-icon-script" />
+	            <p:menuitem value="Raf Görünümü" url="indexi.faces" icon="ui-icon ui-icon-calculator" />
+	       </p:menuButton>
+		</p:panel>
+		
+		<p:remoteCommand action="#{pc_ABar.secDetay}"  update="panel" process="@none"  name="Tem1zle1"/>
+		<p:remoteCommand  action="#{pc_ABar.secK1tap}"  update="panel" process="@none"  name="Tem1zle2"/>
+		<p:remoteCommand action="#{pc_ABar.secDerg1}" update="panel" process="@none"  name="Tem1zle3"/>
+		<p:remoteCommand name="temizleAc" onsuccess="temizle2()"></p:remoteCommand>
+		
+		<h:panelGrid style="margin:0px 0px 0px 20px;" rendered="#{pc_ABar.basitSec}" cellpadding="1" columns="6">
+		<p:outputPanel>
+			<select name="kriter1" id="kriter1" onchange="Doldur('kriter1','Bar:kriterNo');" >
+				<ui:repeat value="#{pc_global_kul_tools.kriter1}" var="krt">
+					<option value="#{krt.slctVl}" >#{krt.slctLbl}</option>
+				</ui:repeat>
+			</select>
+			<h:inputHidden id="kriterNo" value="#{pc_Arama.kriterNo}"></h:inputHidden>			
+		</p:outputPanel>
+			
+		<p:inputText id="aranan" style="width:400px; font-size: 100%;" value="#{pc_Arama.kelime}"></p:inputText>
+		<p:watermark for="aranan" value="Aradığınız kelimeyi girin.." /> 
+		
+		<p:panel style="border:0; margin:0px 0px 0px -20px;" visible="#{!pc_ABar.detaySec }" >
+		<p:commandButton image="ui-icon-search"   action="#{pc_Arama.BasitArama}" 
+		update="Arama:panel" value="Ara" onclick="PrimeFaces.cleanWatermarks();"/>
+		<p:menuButton  value="Seçenekler">
+			<p:menuitem value="Basit Arama" update="panel" action="#{pc_ABar.secBasit}" icon="ui-icon ui-icon-circle-zoomin"/>
+        	<p:menuitem value="Detaylı Arama" update="panel" action="#{pc_ABar.secDetay}" icon="ui-icon ui-icon-circle-zoomin"/>
+        	<p:menuitem value="Kitap Arama" update="panel" action="#{pc_ABar.secK1tap}" icon="ui-icon ui-icon-circle-zoomin"/>
+            <p:menuitem value="Dergi Arama" update="panel" action="#{pc_ABar.secDerg1}" icon="ui-icon ui-icon-circle-zoomin" />
+            <p:menuitem value="Liste Görünümü" url="index.faces"  icon="ui-icon ui-icon-script" />
+            <p:menuitem value="Raf Görünümü" url="indexi.faces"  icon="ui-icon ui-icon-calculator" />
+        </p:menuButton>
+		</p:panel>
+		
+		<p:panel style="border:0; margin:0px 0px 0px -20px;" visible="#{pc_ABar.detaySec }" >
+		<p:commandButton  image="ui-icon-search" action="#{pc_Arama.DetayArama}" 
+		update="Arama:panel" value="Ara" onclick="PrimeFaces.cleanWatermarks();"/>
+		<p:commandButton image="ui-icon-arrowthick-1-w"  onclick="Tem1zle1()" value="Temizle" />
+		<p:menuButton  value="Seçenekler">
+			<p:menuitem value="Basit Arama" update="panel" action="#{pc_ABar.secBasit}" icon="ui-icon ui-icon-circle-zoomin"/>
+        	<p:menuitem value="Detaylı Arama" update="panel" action="#{pc_ABar.secDetay}" icon="ui-icon ui-icon-circle-zoomin"/>
+        	<p:menuitem value="Kitap Arama" update="panel" action="#{pc_ABar.secK1tap}" icon="ui-icon ui-icon-circle-zoomin"/>
+            <p:menuitem value="Dergi Arama" update="panel" action="#{pc_ABar.secDerg1}" icon="ui-icon ui-icon-circle-zoomin" />
+            <p:menuitem value="Liste Görünümü" url="index.faces"  icon="ui-icon ui-icon-script" />
+            <p:menuitem value="Raf Görünümü" url="indexi.faces"  icon="ui-icon ui-icon-calculator" />
+        </p:menuButton>
+		</p:panel>
+	</h:panelGrid>
+	<h:inputHidden  id="kth1d1" value="#{pc_Arama.ktphn1d}"></h:inputHidden>
+	<h:inputHidden  id="blm1d1" value="#{pc_Arama.blm1d}"></h:inputHidden>
+	<h:inputHidden  id="kn1d1" value="#{pc_Arama.konu1d}"></h:inputHidden>
+	<h:inputHidden  id="alt1" value="#{pc_Arama.altT1d}"></h:inputHidden>
+	<h:inputHidden  id="frmt1" value="#{pc_Arama.frmt1d}"></h:inputHidden>
+	<h:inputHidden  id="skl1" value="#{pc_Arama.skl1d}"></h:inputHidden>
+	<h:inputHidden  id="d1l1" value="#{pc_Arama.d1l1d}"></h:inputHidden>
+	<h:inputHidden  id="tarSec1" value="#{pc_Arama.tarSec}"></h:inputHidden>
+	<h:inputHidden  id="tarSec2" value="#{pc_Arama.tarSec2}"></h:inputHidden>
+	<h:inputHidden id="drgSure1" value="#{pc_Arama.drgSure}"></h:inputHidden>
+</p:outputPanel>
+</div>
+  </h:form>
+</ui:composition>

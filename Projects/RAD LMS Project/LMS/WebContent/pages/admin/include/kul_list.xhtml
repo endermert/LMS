@@ -1,0 +1,87 @@
+
+<!-- jsf:pagecode language="java" location="/src/pagecode/pages/admin/include/Kul_list.java" --><!-- /jsf:pagecode -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="list">
+	
+	<p:menubar>
+        	<p:menuitem value="Ekle" url="/pages/admin/admin_kul_ekle.faces" icon="ui-icon ui-icon-plusthick"></p:menuitem>
+        	<p:menuitem value="Yenile" update="panel"  icon="ui-icon ui-icon-refresh"></p:menuitem>
+	</p:menubar>
+
+	        
+	<h:panelGrid id="panel" style="width: 100%;">
+	<p:growl id="messages" showDetail="true"  />
+	<p:dataTable id="table" var="kul" widgetVar="kulTable" value="#{pc_Kul_list.kullan1c1larList}" 
+	paginator="true" rows="10" selectionMode="single" >	   
+        <p:column style="text-align:center; width: 50px;" filterBy="#{kul.kulKodu}">
+            <f:facet name="header">
+                <h:outputText value="Kod" />
+            </f:facet>
+            <h:outputText value="#{kul.kulKodu}"/>
+        </p:column>
+
+        <p:column filterBy="#{kul.kulAd}" >
+            <f:facet name="header">
+                <h:outputText value="Ad" />
+            </f:facet>
+            <h:outputText value="#{kul.kulAd}"/>
+        </p:column>
+        <p:column filterBy="#{kul.kulSoyad}">
+            <f:facet name="header">
+                <h:outputText value="Soyad" />
+            </f:facet>
+            <h:outputText value="#{kul.kulSoyad}" />
+        </p:column>
+        <p:column filterBy="#{kul.kulEposta}" >
+            <f:facet name="header">
+                <h:outputText value="E-Posta" />
+            </f:facet>
+            <h:outputText value="#{kul.kulEposta}"/>
+        </p:column>       
+        
+        <p:column style="width: 60px;" >
+            <f:facet name="header">
+                <h:outputText value="Kayit T." />
+            </f:facet>
+            <h:outputText value="#{kul.kulKytTar}">
+            <f:convertDateTime type="date"></f:convertDateTime>
+            </h:outputText>
+        </p:column>
+       
+		<p:column style="width: 60px;">
+			<f:facet name="header">
+                <h:outputText value="İşlem" />
+            </f:facet>            
+                      
+            <p:commandButton action="gitDuzeltFrm" image="ui-icon ui-icon-pencil">
+				<f:setPropertyActionListener value="#{kul.kul1d}" target="#{pc_global_kul_tools.kul1d}" />
+			</p:commandButton>
+			<p:commandButton oncomplete="confirmation.show()" image="ui-icon ui-icon-trash">
+				<f:setPropertyActionListener value="#{kul.kul1d}" target="#{pc_global_kul_tools.kul1d}" />
+			</p:commandButton>						
+			
+        </p:column>
+    </p:dataTable>
+    </h:panelGrid>
+	<p:confirmDialog message="Silme işlemine devamedece misiniz?"
+				showEffect="bounce" hideEffect="explode"
+				header="Siliniyor..." severity="alert" widgetVar="confirmation">
+				
+		<p:commandButton value="Evet" update="panel" onclick="confirmation.hide()"
+					action="#{pc_Kul_duzelt.deleteKullan1c1larAction}" />
+		<p:commandButton value="Hayır" onclick="confirmation.hide()" type="button" /> 
+				
+	</p:confirmDialog>
+	</h:form>
+</ui:composition>

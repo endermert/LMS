@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:p="http://primefaces.prime.com.tr/ui">
+<h:form prependId="false">
+	<p:menu style="width:100%">  
+        <p:submenu label="Kütüphanem" style="width:100%" >  
+            <p:menuitem value="Üzerimdekiler" update="form1:panel" action="#{pc_Yyn_Goster.stUzerimde}" icon="ui-icon ui-icon-calculator" />
+            <p:menuitem value="İadelerim" update="form1:panel" action="#{pc_Yyn_Goster.stIadeler}" icon="ui-icon ui-icon-calculator" />
+            <p:menuitem value="Ayırttıklarım" update="form1:panel" action="#{pc_Yyn_Goster.stRzrv}" icon="ui-icon ui-icon-calculator" />
+        </p:submenu>
+    </p:menu>
+    
+    <p:remoteCommand name="lazyload" update="form1:panel">
+	</p:remoteCommand>  
+</h:form>
+</ui:composition>

@@ -1,0 +1,421 @@
+<!-- jsf:pagecode language="java" location="/src/pagecode/pages/admin/include/Drg_ekle.java" --><!-- /jsf:pagecode -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form prependId="false">
+
+		<p:panel id="panel" header="Yeni Dergi">
+		
+			<p:growl id="growl" showDetail="true"  />
+			
+			<p:tabView style="width:100%;" dynamic="true" cache="true" >
+			<p:tab title="Bilgiler">
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+					
+					$('select#drgKonu1').selectmenu({style:'dropdown'});
+					$('select#drgYay1nc11').selectmenu({style:'dropdown'});
+					$('select#drgD1l1').selectmenu({style:'dropdown'});
+					
+				});
+			</script>	
+			<h:panelGrid columns="3" rowClasses="row1,row1">
+			<h:panelGrid columns="2">
+				
+				<h:outputLabel value="Kod*" for="drgKodu1" /><span></span>
+				
+				<p:inputText styleClass="inputText" id="drgKodu1" required="true"
+					title="Bu alana yayının kodu girilir.." 
+					label="Kod" value="#{pc_Drg_ekle.derg1ler.drgKodu}">
+				</p:inputText>
+				<p:message for="drgKodu1" display="icon" />
+				
+
+				<h:outputLabel value="Adı*" for="drgAd1" /><span></span>
+				<p:inputText styleClass="inputText" id="drgAd1" required="true" style="width:300px;"
+					title="Bu alana yayının adı girilir.."
+					label="Ad" value="#{pc_Drg_ekle.derg1ler.drgAd}">
+				</p:inputText>
+				<p:message for="drgAd1" display="icon" />
+				
+				<h:panelGrid columns="2" cellspacing="0">
+				
+				<h:outputLabel value="ISSN*" for="drg1sbn1" />
+				<h:outputLabel value="Sayı*" for="drgSay1" />
+				
+				<p:inputText styleClass="inputText" id="drg1sbn1" required="true" 
+					label="ISBN" value="#{pc_Drg_ekle.derg1ler.drg1ssn}">
+				</p:inputText>
+				
+				<p:inputText id="drgSay1" required="true" 
+					label="Sayısı" value="#{pc_Drg_ekle.derg1ler.drgSay1}">
+				</p:inputText>
+				
+				</h:panelGrid>
+				<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+					<p:message for="drg1sbn1" display="icon" />
+					<p:message for="drgSay1" display="icon" />
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" cellspacing="0">
+
+					<h:outputLabel value="Yayın Yeri*" for="drgYay1nyer11" />
+					<h:outputLabel value="Yayın Tarihi" for="yynTar1" />
+					
+					<p:inputText styleClass="inputText" id="drgYay1nyer11"
+						required="true" label="Yayın Yeri" style="width:200px;"
+						value="#{pc_Drg_ekle.derg1ler.drgYay1nyer1}">
+					</p:inputText>
+					
+					<p:inputMask styleClass="inputText" id="yynTar1" style="width:80px;"
+						mask="99/99/9999" value="#{pc_Drg_ekle.derg1ler.drgYay1nTar}"
+						label="Yayın Tarihi" required="true">
+						<f:convertDateTime pattern="dd/mm/yyyy" />
+					</p:inputMask>
+				</h:panelGrid>
+				<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+					<p:message for="drgYay1nyer11" display="icon" />
+					<p:message for="yynTar1" display="icon" />
+				</h:panelGrid>
+				
+			</h:panelGrid>
+			<p:separator style="width:1px; height:100px;"/>
+			<h:panelGrid columns="2">
+				<h:panelGrid columns="2" cellspacing="0">
+					
+					<h:outputLabel value="Yayınlayan*" for="drgYay1nc11" />
+					<h:outputLabel value="Dil*" for="drgD1l1" />
+					
+					<h:selectOneMenu disabledClass="true" id="drgYay1nc11"
+						style="width:200px;" required="true" label="Yayıncı"
+						value="#{pc_Drg_ekle.derg1ler.drgYay1nc1}">
+						<f:selectItem noSelectionOption="true" itemLabel="Seçiniz" />
+						<f:selectItems value="#{pc_global_kul_tools.yay1nc1larList}"
+							var="ync" itemLabel="#{ync.yncAd}" itemValue="#{ync.ync1d}" />
+					</h:selectOneMenu>
+					
+					
+		
+					<h:selectOneMenu id="drgD1l1"
+						style="width:100px;" required="true" label="Dil"
+						value="#{pc_Drg_ekle.derg1ler.drgD1l}">
+						<f:selectItem noSelectionOption="true" itemLabel="Seçiniz" />
+						<f:selectItems value="#{pc_global_kul_tools.d1llerList}" var="dil"
+							itemLabel="#{dil.d1lAd}" itemValue="#{dil.d1l1d}" />
+					</h:selectOneMenu>
+
+				
+				</h:panelGrid>
+				<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+					<p:message for="drgYay1nc11" display="icon" />
+					<p:message for="drgD1l1" display="icon" />
+				</h:panelGrid>
+
+				<h:outputLabel value="Konu" for="drgKonu1" /><span></span>
+				<h:selectOneMenu id="drgKonu1"
+					style="width:300px;" required="true" label="Konu"
+					value="#{pc_Drg_ekle.derg1ler.drgKonu}">
+					<f:selectItem noSelectionOption="true" itemLabel="Seçiniz" />
+					<f:selectItems value="#{pc_global_kul_tools.konularList}" var="kon"
+						itemLabel="#{kon.konAd}" itemValue="#{kon.kon1d}" />
+				</h:selectOneMenu>
+				<p:message for="drgKonu1" display="icon" />
+			</h:panelGrid>
+			</h:panelGrid>
+					
+		</p:tab>
+				<p:tab title="Özelleştir">
+					<script type="text/javascript">
+						jQuery(document).ready(function($){
+
+							
+							$('select#alt1d1').selectmenu({style:'dropdown'});
+							$('select#fmt1d1').selectmenu({style:'dropdown'});
+							$('select#skl1d1').selectmenu({style:'dropdown'});
+							$('select#yayDurum1').selectmenu({style:'dropdown'});
+							$('select#yaySaglamaSkl1').selectmenu({style:'dropdown'});
+							$('select#yayYasGrup1').selectmenu({style:'dropdown'});
+							$('select#drgSure').selectmenu({style:'dropdown'});
+							
+							
+						});
+						
+					</script>
+						<h:panelGrid columns="3" >
+						<h:panelGrid columns="1" >
+						
+						<h:outputLabel value="Durum" for="yayDurum1" />
+						<h:selectOneMenu   
+							style="width:230px;" label="Durum" id="yayDurum1"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayDurum}">
+							<f:selectItem itemValue="Aktif" itemLabel="Aktif"></f:selectItem>
+							<f:selectItem itemValue="Pasif" itemLabel="Pasif"></f:selectItem>
+						</h:selectOneMenu>
+						
+						<h:outputLabel value="Alt Tür" for="alt1d1" />
+						<h:selectOneMenu  id="alt1d1"
+							style="width:230px;" label="Alt Tür"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.alt1d}">
+							<f:selectItem noSelectionOption="true" itemLabel="Seçiniz"></f:selectItem>
+							<f:selectItems value="#{pc_global_kul_tools.drgAltT1pler}" var="alt"
+								itemLabel="#{alt.altDeger}" itemValue="#{alt.alt1d}" />
+						</h:selectOneMenu>
+						</h:panelGrid>
+						
+						
+						
+						<h:panelGrid columns="1" >
+						<h:outputLabel value="Format" for="fmt1d1" />
+						<h:selectOneMenu  id="fmt1d1"
+							style="width:230px;" label="Format"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.fmt1d}">
+							<f:selectItem noSelectionOption="true" itemLabel="Seçiniz"></f:selectItem>
+							<f:selectItems value="#{pc_global_kul_tools.yynFormat}" var="fmt"
+								itemLabel="#{fmt.fmtDeger}" itemValue="#{fmt.fmt1d}" />
+						</h:selectOneMenu>
+						
+						
+						<h:outputLabel value="Şekil" for="skl1d1" />
+						<h:selectOneMenu id="skl1d1"
+							style="width:230px;" label="Şekil"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.skl1d}">
+							<f:selectItem noSelectionOption="true" itemLabel="Seçiniz"></f:selectItem>
+							<f:selectItems value="#{pc_global_kul_tools.yynSekil}" var="skl"
+								itemLabel="#{skl.sklDeger}" itemValue="#{skl.skl1d}" />
+						</h:selectOneMenu>
+						</h:panelGrid>
+						<h:panelGrid columns="1" >
+						<h:outputLabel value="Sağlama Şekli" for="yaySaglamaSkl1" />
+						<h:selectOneMenu  id="yaySaglamaSkl1" 
+							style="width:230px;" label="Sağlama Şekli"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.yaySaglamaSkl}">
+							<f:selectItem noSelectionOption="true" itemLabel="Seçiniz"></f:selectItem>
+							<f:selectItems value="#{pc_global_kul_tools.sglmaSkl1}" />
+						</h:selectOneMenu>
+						
+						<h:outputLabel value="Yaş Grubu" for="yayYasGrup1" />
+						<h:selectOneMenu  id="yayYasGrup1" 
+						style="width:230px;" label="Yaş"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayYasGrup}">
+							<f:selectItems value="#{pc_global_kul_tools.yasGrubu}" />
+						</h:selectOneMenu>
+						</h:panelGrid>
+						<h:panelGrid columns="1" >
+						<h:outputLabel value="Süre" for="drgSure" />
+						<h:selectOneMenu  id="drgSure"
+							style="width:230px;" label="Süre"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.yaySure}">
+							<f:selectItem noSelectionOption="true" itemLabel="Seçiniz"></f:selectItem>
+							<f:selectItems value="#{pc_global_kul_tools.drgSure}" />
+						</h:selectOneMenu>
+						</h:panelGrid>
+						</h:panelGrid>
+						
+		  			<h:panelGrid columns="3" cellspacing="0" cellpadding="0" >
+						<h:panelGrid columns="1" >
+						<h:outputLabel value="Sorumlular" for="yaySorumlular1" />
+						<p:inputTextarea id="yaySorumlular1" style="width:222px;"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.yaySorumlular}">
+						</p:inputTextarea>
+						</h:panelGrid>
+						<h:panelGrid columns="1" >
+						<h:outputLabel value="Fiziki Özellikler" for="yayF1z1k1Oz1" />
+						<p:inputTextarea  id="yayF1z1k1Oz1" style="width:222px;"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayF1z1k1Oz}">
+						</p:inputTextarea>
+						</h:panelGrid>
+						<h:panelGrid columns="1" >
+						<h:outputLabel value="Konu Başlıkları" for="yayKonuBasl1k1" />
+						<p:inputTextarea  id="yayKonuBasl1k1" style="width:222px;"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayKonuBasl1k}">
+						</p:inputTextarea>
+						</h:panelGrid>
+					</h:panelGrid>
+					<h:panelGrid columns="2" cellspacing="0" cellpadding="0" >
+					
+						<h:panelGrid columns="2" >
+							<h:outputLabel value="Anahtar Kelimeler" for="yayKel1me" />
+							<h:outputLabel value="Basım Bilgileri" for="yayBasB1lg" />
+								
+							<p:inputTextarea id="yayKel1me" style="width:222px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayAnahtarKel1meler}">
+							</p:inputTextarea>
+						
+							<p:inputTextarea id="yayBasB1lg" style="width:222px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayBasB1lg}">
+							</p:inputTextarea>
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:panelGrid columns="3">
+							<h:outputLabel value="Cilt" for="yayC1ltSay1" />
+							<h:outputLabel value="Kopya" for="yayKopyaSay1" />
+							<h:outputLabel value="Sayfa" for="yaySayfa1" />
+							
+							<p:inputText id="yayC1ltSay1" style="width:50px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayC1ltSay}">
+							</p:inputText>
+							
+							<p:inputText  id="yayKopyaSay1" style="width:50px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayKopyaSay}">
+							</p:inputText>
+							
+							<p:inputText id="yaySayfa1" style="width:50px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yaySayfa}">
+							</p:inputText>
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+							<h:outputLabel value="URL" for="yayUrl1" />
+							<p:inputText id="yayUrl1" style="width:200px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayUrl}">
+							</p:inputText>
+							</h:panelGrid>
+						</h:panelGrid>
+				</h:panelGrid>		
+		  		
+		  		</p:tab>
+			  		
+			  		<p:tab title="Konum" >
+		  				<script type="text/javascript">
+						jQuery(document).ready(function($){
+
+							
+							$('select#ktphn1d1').selectmenu({style:'dropdown'});
+							$('select#yayBolum1').selectmenu({style:'dropdown'});
+							$('select#yay1z1n1').selectmenu({style:'dropdown'});
+							$('select#yay1z1n2').selectmenu({style:'dropdown'});
+							$('select#yay1z1n3').selectmenu({style:'dropdown'});
+							$('select#yay1z1n4').selectmenu({style:'dropdown'});
+							$('select#yay1z1n5').selectmenu({style:'dropdown'});
+							
+						});
+						
+						</script>
+		  				<h:panelGrid columns="2">
+						<h:outputLabel value="Kütüphane" for="Drghn1d1" />
+						<h:outputLabel value="Bölüm" for="yayBolum1" />
+						
+						<h:selectOneMenu id="ktphn1d1" 
+							style="width:210px;" label="Kütüphane"
+							value="#{pc_Drg_ekle.yynAyr1nt1Reg.ktphn1d}">
+							<f:selectItem noSelectionOption="true" itemLabel="Seçiniz"></f:selectItem>
+							<f:selectItems value="#{pc_global_kul_tools.kutuphaneler}" var="kth"
+								itemLabel="#{kth.ktphnAd}" itemValue="#{kth.ktphn1d}" />
+						</h:selectOneMenu>
+						
+						<h:selectOneMenu id="yayBolum1" style="width:210px;" label="Bölüm"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.blm1d}">
+								<f:selectItem noSelectionOption="true" itemLabel="Seçiniz"></f:selectItem>
+								<f:selectItems value="#{pc_global_kul_tools.ktphnBolum}" var="kth"
+									itemLabel="#{kth.blmAd}" itemValue="#{kth.blm1d}" />
+							</h:selectOneMenu>
+							
+						</h:panelGrid>
+						<h:panelGrid columns="3">
+							
+							<h:outputLabel value="Oda" for="yayOda1" />
+							<h:outputLabel value="Sınıflama" for="yayS1n1flama1" />
+							<h:outputLabel value="Demirbaş" for="yayDem1rbas1" />
+							
+							<p:inputText styleClass="inputText" id="yayOda1" style="width:200px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayOda}">
+							</p:inputText>
+							
+							<p:inputText styleClass="inputText" id="yayS1n1flama1" style="width:200px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayS1n1flama}">
+							</p:inputText>
+							
+							<p:inputText styleClass="inputText" id="yayDem1rbas1" style="width:200px;"
+								value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayDem1rbas}">
+							</p:inputText>
+						</h:panelGrid>
+						<h:panelGrid columns="5">
+							<h:outputLabel value="Ödünç" for="yay1z1n1" />
+							<h:outputLabel value="Fotokopi" for="yay1z1n2" />
+							<h:outputLabel value="Referans" for="yay1z1n3" />
+							<h:outputLabel value="Hasarlı" for="yay1z1n4" />
+							<h:outputLabel value="Bakımda" for="yay1z1n5" />
+							
+							<h:selectOneMenu id="yay1z1n1" style="width:135px;" label="Ödünç"
+								value="#{pc_Drg_ekle.yyn1z1nler.z1nOdunc}">
+								<f:selectItem itemValue="null" itemLabel="Seçiniz"></f:selectItem>
+								<f:selectItem itemValue="true" itemLabel="Evet"></f:selectItem>
+								<f:selectItem itemValue="false" itemLabel="Hayır"></f:selectItem>
+							</h:selectOneMenu>
+							<h:selectOneMenu id="yay1z1n2" style="width:135px;" label="Foto"
+								value="#{pc_Drg_ekle.yyn1z1nler.z1nFotokop1}">
+								<f:selectItem itemValue="null" itemLabel="Seçiniz"></f:selectItem>
+								<f:selectItem itemValue="true" itemLabel="Evet"></f:selectItem>
+								<f:selectItem itemValue="false" itemLabel="Hayır"></f:selectItem>
+							</h:selectOneMenu>
+							
+							<h:selectOneMenu id="yay1z1n3" style="width:135px;" label="Referans"
+								value="#{pc_Drg_ekle.yyn1z1nler.z1nReferans}">
+								<f:selectItem itemValue="null" itemLabel="Seçiniz"></f:selectItem>
+								<f:selectItem itemValue="true" itemLabel="Evet"></f:selectItem>
+								<f:selectItem itemValue="false" itemLabel="Hayır"></f:selectItem>
+							</h:selectOneMenu>
+							
+							<h:selectOneMenu id="yay1z1n4" style="width:135px;" label="Hasarlı"
+								value="#{pc_Drg_ekle.yyn1z1nler.z1nAr1zal1}">
+								<f:selectItem itemValue="null" itemLabel="Seçiniz"></f:selectItem>
+								<f:selectItem itemValue="true" itemLabel="Evet"></f:selectItem>
+								<f:selectItem itemValue="false" itemLabel="Hayır"></f:selectItem>
+							</h:selectOneMenu>
+							
+							<h:selectOneMenu id="yay1z1n5" style="width:135px;" label="Bakım"
+								value="#{pc_Drg_ekle.yyn1z1nler.z1nBak1mda}">
+								<f:selectItem itemValue="null" itemLabel="Seçiniz"></f:selectItem>
+								<f:selectItem itemValue="true" itemLabel="Evet"></f:selectItem>
+								<f:selectItem itemValue="false" itemLabel="Hayır"></f:selectItem>
+							</h:selectOneMenu>
+							
+						</h:panelGrid>
+
+			  		</p:tab>
+			  		
+			  		<p:tab title="Öz/Özet" >
+			  		<div align="center">
+			  			<p:editor width="800"  value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayOzOzet1cndklr}"/>
+			  			<p:separator style="width:800px;height:2px" />
+			  		</div>
+				  		
+			  		</p:tab>
+			  		
+			  		
+			  		<p:tab title="Not Ekle">
+			  		<div align="center">
+			  			<p:editor width="800" value="#{pc_Drg_ekle.yynAyr1nt1Reg.yayNotlar}" />
+			  			<p:separator style="width:800px;height:2px" />
+			  		</div>
+			  		</p:tab>
+
+		</p:tabView>		
+		
+		<h:panelGrid columns="2" cellpadding="5" cellspacing="5" rowClasses="row2,row1">
+			<p:commandButton value="Kaydet" update="panel" image="ui-icon ui-icon-disk"
+				action="#{pc_Drg_ekle.createDerg1lerAction}"></p:commandButton>
+			<h:form id="upform"  prependId="false"  enctype="multipart/form-data">
+	                    <p:growl id="messages" showDetail="true"/>
+	                    <p:fileUpload fileUploadListener="#{pc_Drg_ekle.handleFileUpload}"
+	                                  mode="advanced" label="Resim Seç"
+	                                  update="messages"
+	                                  sizeLimit="1000000"
+	                                  allowTypes="png,gif,jpg" />
+	       </h:form>
+		</h:panelGrid>
+			
+		<p:messages id="derg1ler2messages"></p:messages>
+	
+	</p:panel>
+	
+	</h:form>
+</ui:composition>

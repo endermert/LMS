@@ -1,0 +1,147 @@
+#heading {
+  padding: 20px;
+  margin-bottom: 10px;
+  background: #dddddd;
+  border: 1px solid #cccccc;
+  font-size: 1.4em;
+  font-style: italic;
+  font-family: Palatino;
+  right: 20px;
+  text-align: center;
+}
+
+div.planetImage {
+  margin-top: 10px;
+  text-align: center;
+} 
+
+#promptTop {
+  font-size: 1.15em;
+  margin-left: 5px;
+  margin-bottom: 20px;
+  font-family: Palatino;
+  font-style: italic;
+}
+#dDetay1 {
+  text-align:right;
+}
+#dDetay2 {
+  text-align:left;
+}    
+
+.explanation {
+  padding: 20px;
+  font-family: Palatino;
+  font-style: italic;
+  color: blue;
+}
+
+#prompt {
+  font-size: 1.15em; 
+  margin-left: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: Palatino;
+}
+
+#welcomeGreeting {
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+#welcomeImage {
+  margin-top: 10px;
+  text-align: center; 
+}
+
+#menuLeft {
+  position: absolute;
+  padding-top: 5px;
+  margin-top:5px;
+  height: 100%;
+  width: 200px;
+
+}
+#aramaBar {
+  padding-top: 5px;
+  margin-top:5px;
+  width: 100%;
+}
+#goster {
+	padding-top: 10px;
+	margin-top: 5px;
+	width: 100%;
+}
+ 
+#menuRight {
+
+
+  position:absolute;
+  top: 85px;
+  right: 10px;
+  padding-top: 50px;
+  padding-bottom: 10px;
+}
+
+#content {
+  border:thin;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 5px;	
+  padding-top: 5px;
+  position:absolute;
+  left: 225px; 
+  right: 10px;
+  float: inherit;
+  text-align: left;
+}
+#logon {
+  border:thin;
+  margin-top: 50px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 5px;	
+  position:absolute;
+  left: 750px; 
+  right: 5px;
+  float: inherit;
+  text-align: right;
+  width: 300px;
+  height: 25px;
+}
+#toptop {
+  border:thin;
+  position:absolute;
+  left: 0px;
+  top:0px; 
+  float: inherit;
+  width: 300px;
+  height: 25px;
+}
+.kulTableList{
+	background-color:blue;
+	text-align: center;
+}
+
+#menuAndContent {
+
+  width: 100%;
+  height: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.icon {
+  margin: 10px;
+  border: none;
+}
+
+.placeHeading {
+	margin-top: 10px;margin-right:10px; padding: 10px; float: left;border:thin solid lightGray;
+}
+
+.placeMap {
+	border:thin solid lightGray;margin: 5px;padding: 5px;
+}	

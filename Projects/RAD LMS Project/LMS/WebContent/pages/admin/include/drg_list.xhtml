@@ -1,0 +1,87 @@
+
+<!-- jsf:pagecode language="java" location="/src/pagecode/pages/admin/include/Drg_list.java" --><!-- /jsf:pagecode -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="drgList">
+		<p:menubar>
+        	<p:menuitem value="Ekle" url="/pages/admin/admin_drg_ekle.faces" icon="ui-icon ui-icon-plusthick"></p:menuitem>
+        	<p:menuitem value="Yenile" update="panel"  icon="ui-icon ui-icon-refresh"></p:menuitem>
+		</p:menubar>
+	
+	<h:panelGrid id="panel" style="width: 100%;">
+	<p:growl id="messages" showDetail="true"  />
+		<p:dataTable id="derg1lerList1" value="#{pc_Drg_list.derg1lerList}"
+			var="varderg1lerList" border="0" cellpadding="2" cellspacing="0"
+			paginator="true" rows="10" selectionMode="single" >
+			
+			<p:column id="drgKodu1column" filterBy="#{varderg1lerList.drgKodu}" style="width: 100px;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Kod"
+						id="drgKodu1text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="drgKodu1"
+					value="#{varderg1lerList.drgKodu}">
+				</h:outputText>
+			</p:column>
+			<p:column id="drg1ssn1column" filterBy="#{varderg1lerList.drg1ssn}" style="width: 120px;">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="ISSN"
+						id="drg1ssn1text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="drg1ssn1"
+					value="#{varderg1lerList.drg1ssn}">
+				</h:outputText>
+			</p:column>
+			<p:column id="drgAd1column" filterBy="#{varderg1lerList.drgAd}">
+				<f:facet name="header">
+					<h:outputText styleClass="outputText" value="Başlık" id="drgAd1text"></h:outputText>
+				</f:facet>
+				<h:outputText styleClass="outputText" id="drgAd1"
+					value="#{varderg1lerList.drgAd}">
+				</h:outputText>
+			</p:column>
+
+			<p:column style=" text-align:center; width: 60px;">
+				<f:facet name="header">
+					<h:outputText value="Yayın Tarihi"/>
+				</f:facet>
+				<h:outputText value="#{varderg1lerList.drgYay1nTar}">
+					<f:convertDateTime type="date"></f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			<p:column  style="width: 60px;">
+			<f:facet name="header" >
+                <h:outputText value="İşlem" />
+            </f:facet>            
+                      
+            <p:commandButton action="gitDrgDuzelt" image="ui-icon ui-icon-pencil">
+				<f:setPropertyActionListener value="#{varderg1lerList.drg1d}" target="#{pc_global_kul_tools.drg1d}" />
+			</p:commandButton>
+			<p:commandButton oncomplete="confirmation.show()" image="ui-icon ui-icon-closethick">
+				<f:setPropertyActionListener value="#{varderg1lerList.drg1d}" target="#{pc_global_kul_tools.drg1d}" />
+			</p:commandButton>						
+			
+        </p:column>
+		</p:dataTable>
+		</h:panelGrid>
+		<p:confirmDialog message="Silme işlemine devamedece misiniz?"
+				showEffect="bounce" hideEffect="explode"
+				header="Siliniyor..." severity="alert" widgetVar="confirmation">
+				
+		<p:commandButton value="Evet" update="panel" onclick="confirmation.hide()"
+					action="#{pc_Drg_duzelt.deleteDerg1lerAction}" />
+		<p:commandButton value="Hayır" onclick="confirmation.hide()" type="button" /> 
+				
+		</p:confirmDialog>
+	</h:form>
+</ui:composition>

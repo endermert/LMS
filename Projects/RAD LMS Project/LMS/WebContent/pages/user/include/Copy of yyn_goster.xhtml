@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<style type="text/css">
+    		.ui-datagrid {
+				font-family:Arial, Helvetica, sans-serif;
+				font-style: normal;
+				background-image: url('http://www.primefaces.org/showcase/images/macosx/macback.png');
+			}
+	</style>
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="form1">
+	<h:panelGrid columns="3" >
+		<p:commandButton value="Hepsi" update="panel" action="#{pc_Yyn_Goster.stHepsi}"></p:commandButton>
+		<p:commandButton value="Üzerimdekiler" update="panel" action="#{pc_Yyn_Goster.stUzerimde}"></p:commandButton>
+		<p:commandButton value="İadelerim" update="panel" action="#{pc_Yyn_Goster.stIadeler}"></p:commandButton>
+	</h:panelGrid>
+	
+	<h:panelGrid id="panel" style="width: 600px;">
+	<p:growl id="messages" showDetail="true"  />
+	
+		
+	<ui:repeat var="varyay1nlarList" value="#{pc_Yyn_Goster.yynGoster}" >
+
+				<h:panelGrid columns="1">
+					<h:outputText rendered="#{varyay1nlarList.yay1nOzel.k1tap}" styleClass="outputText" id="ktpAd1"
+				value="K-#{varyay1nlarList.ktp1d.ktpAd}">
+				</h:outputText>
+				<h:outputText rendered="#{varyay1nlarList.yay1nOzel.derg1}" styleClass="outputText" id="drgAd1"
+					value="D-#{varyay1nlarList.drg1d.drgAd}">
+				</h:outputText>
+				</h:panelGrid>
+
+	</ui:repeat>
+	
+	<p:dataGrid var="varyay1nlarList" value="#{pc_Yyn_Goster.yynGoster}" columns="3"
+		rows="12" paginator="true" effect="true" style="position: absolute; "
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="9,12,15">
+		<h:column colspan="0" rowspan="0" style="background-color:transparent;" >
+			
+				<h:panelGrid columns="1"  style="width:100%">
+					<h:outputText rendered="#{varyay1nlarList.yay1nOzel.k1tap}" styleClass="outputText" id="ktpAd1"
+				value="K-#{varyay1nlarList.ktp1d.ktpAd}">
+				</h:outputText>
+				<h:outputText rendered="#{varyay1nlarList.yay1nOzel.derg1}" styleClass="outputText" id="drgAd1"
+					value="D-#{varyay1nlarList.drg1d.drgAd}">
+				</h:outputText>
+				</h:panelGrid>
+			
+		</h:column>
+
+	</p:dataGrid>
+	
+	<p:dataTable id="table" var="varyay1nlarList" widgetVar="yynTbl" value="#{pc_Yyn_Goster.yynGoster}"  
+	paginator="true" rows="10" selectionMode="single" >	   
+        	<p:column id="yynKodu1column" filterBy="#{varyay1nlarList.yyn1d}" >
+				<f:facet name="header">
+				<h:outputText styleClass="outputText" value="Yyn1d" id="yyn1d1text"></h:outputText>
+			</f:facet>
+			
+			<h:outputText styleClass="outputText" id="yyn1d1"
+				value="#{varyay1nlarList.yyn1d}">
+			</h:outputText>
+			</p:column>
+			<p:column id="ktp1sbn1column" filterBy="#{vark1taplarList.ktp1sbn}">
+				<f:facet name="header">
+				<h:outputText styleClass="outputText" value="T1p1d" id="t1p1d1text"></h:outputText>
+			</f:facet>
+			<h:outputText styleClass="outputText" id="t1p1d1"
+				value="#{varyay1nlarList.t1p1d}">
+			</h:outputText>
+			</p:column>
+			<p:column id="ktpAd1column" filterBy="#{vark1taplarList.ktpAd}">
+				<f:facet name="header">
+				<h:outputText styleClass="outputText" value="KtpAd" id="ktpAd1text">
+				</h:outputText>
+			</f:facet>
+			<h:outputText rendered="#{varyay1nlarList.yay1nOzel.k1tap}" styleClass="outputText" id="ktpAd1"
+				value="K-#{varyay1nlarList.ktp1d.ktpAd}">
+			</h:outputText>
+			<h:outputText rendered="#{varyay1nlarList.yay1nOzel.derg1}" styleClass="outputText" id="drgAd1"
+				value="D-#{varyay1nlarList.drg1d.drgAd}">
+			</h:outputText>
+			</p:column>
+		</p:dataTable>
+	</h:panelGrid>
+	</h:form>
+</ui:composition>

@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:p="http://primefaces.prime.com.tr/ui">
+<h:form prependId="false">
+	<p:menu style="width:100%">  
+        <p:submenu label="Kütüphanem" style="width:100%" >  
+            <p:menuitem value="Üzerimdekiler" ajax="false" action="UserUzeri" icon="ui-icon ui-icon-calculator" />
+            <p:menuitem value="İadelerim" ajax="false" action="UserIade" icon="ui-icon ui-icon-calculator" />
+            <p:menuitem value="Ayırttıklarım" ajax="false" action="UserRezerv" icon="ui-icon ui-icon-calculator" />
+            <p:menuitem value="İsteklerim" ajax="false" action="User1stek" icon="ui-icon ui-icon-clock" />
+            <p:menuitem value="Listem" ajax="false" action="UserListem" icon="ui-icon ui-icon-star" />
+        </p:submenu>
+    </p:menu>
+</h:form>
+</ui:composition>

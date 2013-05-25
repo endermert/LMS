@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connections:connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:connections="http://www.ibm.com/websphere/wdo/connections">
+  <connection id="LMS">
+    <development xsi:type="connections:rsc-live-connection" id="LMS_dev" name="LMS"/>
+    <runtime xsi:type="connections:datasource-connection" auto-deploy="true" class-location="C:\IBM\SDPShared\plugins\com.ibm.datatools.db2_2.1.102.v20100715_2051\driver\db2jcc4.jar;C:\IBM\SDPShared\plugins\com.ibm.datatools.db2_2.1.102.v20100715_2051\driver\db2jcc4_license_cisuz.jar" id="LMS_runtime" classname="com.ibm.db2.jcc.DB2ConnectionPoolDataSource" database-name="LMS" jndi-name="jdbc/LMS" port-number="50001" resource-reference-name="LMS" server-name="ec2-50-16-75-126.compute-1.amazonaws.com" sql-vendor-type="49" userid="root"/>
+  </connection>
+  <connection id="LMSDB2">
+    <development xsi:type="connections:rsc-live-connection" id="LMSDB2_dev" name="LMSDB2"/>
+    <runtime xsi:type="connections:driver-manager-connection" auto-deploy="true" class-location="C:\IBM\SDPShared\plugins\com.ibm.datatools.db2_2.1.102.v20100715_2051\driver\db2jcc4.jar;C:\IBM\SDPShared\plugins\com.ibm.datatools.db2_2.1.102.v20100715_2051\driver\db2jcc4_license_cisuz.jar" id="LMSDB2_runtime" class-name="com.ibm.db2.jcc.DB2Driver" url="jdbc:db2://localhost:50000/LMS:retrieveMessagesFromServerOnGetMessage=true;" userid="db2admin"/>
+  </connection>
+  <connection id="LMSAWS">
+    <development xsi:type="connections:rsc-live-connection" id="LMSAWS_dev" name="LMSAWS"/>
+    <runtime xsi:type="connections:driver-manager-connection" auto-deploy="true" class-location="C:\IBM\SDPShared\plugins\com.ibm.datatools.db2_2.1.102.v20100715_2051\driver\db2jcc4.jar;C:\IBM\SDPShared\plugins\com.ibm.datatools.db2_2.1.102.v20100715_2051\driver\db2jcc4_license_cisuz.jar" id="LMSAWS_runtime" class-name="com.ibm.db2.jcc.DB2Driver" url="jdbc:db2://ec2-50-16-75-126.compute-1.amazonaws.com:50001/LMS:retrieveMessagesFromServerOnGetMessage=true;" userid="root"/>
+  </connection>
+</connections:connections>

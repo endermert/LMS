@@ -1,0 +1,148 @@
+
+<!-- jsf:pagecode language="java" location="/src/pagecode/pages/admin/include/Kul_ekle.java" --><!-- /jsf:pagecode -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+		<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form id="kayit">
+		<script type="text/javascript">
+			function Doldur(kaynak,hedef) {
+	 					var field1 = document.getElementById(kaynak);
+	 					var field2 = document.getElementById(hedef);
+				field2.value = field1.value
+			};
+			function DoldurKul() {
+				Doldur('kulC1ns1yet1','kayit:kulC1ns1yet');
+				Doldur('kulT1p1','kayit:kulT1p');
+				Doldur('kulDurum1','kayit:kulDurum');
+				Doldur('kulYetk11','kayit:kulYetk1');
+			};
+		</script>
+		<p:panel id="panel" header="Yeni Kullanıcı">
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+					
+					$('select#kulC1ns1yet1').selectmenu({style:'dropdown'});
+					$('select#kulT1p1').selectmenu({style:'dropdown'});
+					$('select#kulYetk11').selectmenu({style:'dropdown'});
+					$('select#kulDurum1').selectmenu({style:'dropdown'});
+					DoldurKul();
+				});
+		
+				
+			</script>
+			<p:growl id="growl" showDetail="true"  />
+			<h:panelGrid columns="3">
+				<h:outputLabel value="Kullanıcı Kodu*" for="kulKod1" />
+				<p:inputText styleClass="inputText" id="kulKod1" required="true"
+					value="#{pc_Kul_ekle.kullan1c1lar.kulKodu}" label="K. Kodu" style="width:100px;">
+				</p:inputText>
+				<p:message for="kulKod1" display="icon" />
+				
+				<h:outputLabel value="Ad*" for="kulAd1" />
+				<p:inputText styleClass="inputText" id="kulAd1" required="true" 
+					value="#{pc_Kul_ekle.kullan1c1lar.kulAd}" label="Ad" style="width:300px;">
+				</p:inputText>
+				<p:message for="kulAd1" display="icon" />
+
+				<h:outputLabel value="Soyad*" for="kulSoyad1"></h:outputLabel>
+				<p:inputText styleClass="inputText" id="kulSoyad1" required="true"
+					value="#{pc_Kul_ekle.kullan1c1lar.kulSoyad}" label="Soyad" style="width:300px;">
+				</p:inputText>
+				<p:message for="kulSoyad1" display="icon" />
+
+				<h:outputLabel value="E-Posta*" for="email" />
+				<p:inputText id="email" required="true" 
+					value="#{pc_Kul_ekle.kullan1c1lar.kulEposta}" label="E-Posta" style="width:300px;">
+					<f:validator validatorId="EmailValidator" />
+				</p:inputText>
+				<p:message for="email" display="icon" />
+
+				<h:outputLabel value="Parola*" for="kulS1fre1" />
+				<p:inputText id="kulS1fre1"  required="true"  label="Parola" style="width:200px;"
+				value="#{pc_Kul_ekle.kullan1c1lar.kulS1fre}">
+				</p:inputText>
+				<p:message for="kulS1fre1" display="icon" />
+				
+				<h:outputLabel value="Cinsiyet" for="kulC1ns1yet1" />
+				<p:outputPanel>
+				<select name="kulC1ns1yet1" id="kulC1ns1yet1" style="width:200px;" 
+				onchange="Doldur('kulC1ns1yet1','kayit:kulC1ns1yet');" >
+					<option value=" ">Seçiniz</option>
+					<option value="Kadın" >Kadın</option>
+					<option value="Erkek" >Erkek</option>
+				</select>
+				</p:outputPanel>
+				<p:message for="kulC1ns1yet" display="icon" />
+
+				<h:outputLabel value="Doğum Tarihi" for="kulDgmTar1" />
+				<p:inputMask styleClass="inputText" id="kulDgmTar1"
+					mask="99/99/9999" value="#{pc_Kul_ekle.kullan1c1lar.kulDgmTar}"
+					label="Doğum Tarihi" required="true">
+					<f:convertDateTime pattern="dd/mm/yyyy" />
+				</p:inputMask>
+				<p:message for="kulDgmTar1" display="icon" />
+
+				<h:outputLabel value="Telefon" for="kulTel1" />
+				<p:inputMask styleClass="inputText" id="kulTel1"
+					mask="(999) 999 99 99" value="#{pc_Kul_ekle.kullan1c1lar.kulTel}">
+				</p:inputMask>
+				<p:message for="kulTel1" display="icon" />
+				
+				<h:outputLabel value="Tip" for="kulT1p1" />
+					<p:outputPanel>
+						<select name="kulT1p1" id="kulT1p1" style="width:200px;" 
+						onchange="Doldur('kulT1p1','kayit:kulT1p');" >
+							<ui:repeat value="#{pc_global_kul_tools.kulT1plerList}" var="tip">
+								<option value="#{tip.t1p1d}">#{tip.t1pDeger}</option>
+							</ui:repeat>
+						</select>
+					</p:outputPanel>
+				<p:message for="kulT1p" display="icon" />
+
+				<h:outputLabel value="Yetki" for="kulYetk11" />
+				<p:outputPanel>
+					<select name="kulYetk11" id="kulYetk11" style="width:200px;" 
+					onchange="Doldur('kulYetk11','kayit:kulYetk1');" >
+						<ui:repeat value="#{pc_global_kul_tools.kulYetk1lerList}" var="ytk">
+							<option value="#{ytk.yet1d}" >#{ytk.yetDeger}</option>
+						</ui:repeat>
+					</select>
+				</p:outputPanel>
+				<p:message for="kulYetk1" display="icon"/>
+
+				<h:outputLabel value="Durum" for="kulDurum1" />
+				<p:outputPanel>
+					<select name="kulDurum1" id="kulDurum1" style="width:200px;" 
+					onchange="Doldur('kulDurum1','kayit:kulDurum');" >
+						<ui:repeat value="#{pc_global_kul_tools.kulDurumlarList}" var="drm">
+							<option value="#{drm.drm1d}" >#{drm.drmDeger}</option>
+						</ui:repeat>
+					</select>
+				</p:outputPanel>
+				<p:message for="kulDurum" display="icon"  />
+				
+			</h:panelGrid>
+
+			<p:commandButton value="Kaydet" update="panel"
+				action="#{pc_Kul_ekle.createKullan1c1larAction}"></p:commandButton>
+			<p:messages id="kullan1c1lar2messages"></p:messages>
+			
+			<h:inputHidden id="kulT1p" required="true" 
+			value="#{pc_Kul_ekle.kullan1c1lar.kulT1p1d}"/>
+			<h:inputHidden id="kulC1ns1yet" required="true" requiredMessage="Cinsiyet: Validation Error: Value is required." 
+			value="#{pc_Kul_ekle.kullan1c1lar.kulC1ns1yet}"/>
+			<h:inputHidden id="kulYetk1" required="true" value="#{pc_Kul_ekle.kullan1c1lar.kulYet1d}"/>
+			<h:inputHidden id="kulDurum" required="true" value="#{pc_Kul_ekle.kullan1c1lar.kulDrm1d}"/>
+		</p:panel>
+
+	</h:form>
+</ui:composition>

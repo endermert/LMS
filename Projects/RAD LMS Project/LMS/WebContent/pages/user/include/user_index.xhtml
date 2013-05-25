@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form prependId="false">
+		 <script type="text/javascript">
+            var chartStyle = {
+                padding:20,
+                legend: {
+                    display:"top",
+                    spacing:10
+                }
+            };
+        </script>
+        <h:panelGrid style="width:100%;" columns="1"  cellspacing="0">
+		<p:dashboard id="board2" model="#{pc_Kul_index.model}" style="width:100%;">
+
+	        <p:panel id="kulHrkt" header="Sizin Yayın Hareket İstatistiğiniz" style="width:500px;">
+	            <p:lineChart value="#{pc_Kul_index.istat3}" var="istat3" xfield="#{istat3.ay}" 
+	            style="chartStyle" width="400">
+					<p:chartSeries label="Ödünç Alınan" value="#{istat3.verilen}" />
+				</p:lineChart>
+	        </p:panel>
+	
+	        <p:panel id="lifestyle" header="Lifestyle">
+	            <h:outputText value="Lifestyle Content"  />
+	        </p:panel>
+	
+	        <p:panel id="weather" header="Weather">
+	            <h:outputText value="Weather Content" />
+	        </p:panel>
+	
+	        <p:panel id="politics" header="Politics">
+	            <h:outputText value="Politics Content" />
+	        </p:panel>
+	    </p:dashboard>
+		</h:panelGrid>
+	</h:form>
+</ui:composition>

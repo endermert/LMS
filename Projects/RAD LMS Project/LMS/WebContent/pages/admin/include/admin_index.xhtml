@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<div align="center">
+	<p:ajaxStatus onstart="stsDlg.show();" onsuccess="stsDlg.hide();"></p:ajaxStatus>
+	<p:dialog width="50" height="100" modal="true" widgetVar="stsDlg" header="Lütfen Bekleyin.."    
+			draggable="false" closable="false" resizable="false" >  
+		<p:graphicImage value="#{resource['images:lb.gif']}" />  
+	</p:dialog> 
+	</div>
+	<h:form prependId="false">
+		 <script type="text/javascript">
+            var chartStyle = {
+                padding:20,
+                legend: {
+                    display:"top",
+                    spacing:10
+                }
+            };
+        </script>
+        <h:panelGrid style="width:100%;" columns="1"  cellspacing="0">
+		<h:panelGrid columns="2">
+	
+	        <p:panel id="ktphnHrkt" header="Kütüphane Yayın Hareket İstatistiği" style="width:500px;">
+	            <p:columnChart value="#{pc_Kul_index.istat1}" 
+	            var="istat1" xfield="#{istat1.ay}" 
+	            style="chartStyle" width="400">
+	            	<p:chartSeries label="Ödünç Verilen" value="#{istat1.verilen}" />
+					<p:chartSeries label="İade Alınan" value="#{istat1.alinan}" />
+				</p:columnChart>
+                    
+	        </p:panel>
+	
+	        <p:panel id="kulHrkt" header="Sizin Yayın Hareket İstatistiğiniz" style="width:500px;">
+	            <p:lineChart value="#{pc_Kul_index.istat2}" var="istat2" xfield="#{istat2.ay}" 
+	            style="chartStyle" width="400">
+					<p:chartSeries label="Ödünç Verdiğiniz" value="#{istat2.verilen}" />
+					<p:chartSeries label="İade Aldığınız" value="#{istat2.alinan}" />
+				</p:lineChart>
+	        </p:panel>
+	
+	        </h:panelGrid>
+		</h:panelGrid>
+	</h:form>
+</ui:composition>
